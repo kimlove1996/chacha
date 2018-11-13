@@ -432,6 +432,111 @@
 	 
 	 
 	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 /* 삭제 확인/취소 모달 */
+     #delete_modal_all{
+     	z-index: 10;
+     	position: fixed;
+     	top: 0;
+     	left: 0;
+     	width: 100%;
+     	height: 100%;
+     	background-color: rgba(0, 0, 0, 0.4);
+     	display: block;
+     }
+     
+     #delete_modal_line{
+	    margin: 0 auto;
+	    width: 500px;
+	    height: 250px;
+	    border: thin solid #EAEAEA;
+	    background-color: white;
+	    border-radius: 72px;
+	    display: block;
+	    position: relative;
+	    top: 380px;
+	    border: 7px double #ffb0b0;
+     }
+     
+     
+     
+     #modal_close_btn{
+		position: absolute;
+	    right: 32px;
+	    top: 24px;
+	    color: #706464!important;
+	    font-size: 25px;
+	    padding: 5px;
+	    display: block;
+	    font-size: 19px;
+     }
+     
+     #delete_modal_line span:nth-child(1){
+     	    position: absolute;
+		    right: 32px;
+		    top: 24px;
+		    color: #706464!important;
+		    font-size: 25px;
+		    padding: 5px;
+		    display: block;
+		    font-size: 19px;
+     }
+     #delete_modal_line span:last-child{
+     	    position: absolute;
+		    right: 32px;
+		    top: 24px;
+		    color: #706464!important;
+		    font-size: 25px;
+		    padding: 5px;
+		    display: block;
+		    font-size: 19px;
+     
+     }
+     
+     
+     #modal_close_btn:hover {
+     	background-color: #d4d4d4;
+     	border-radius: 30px;
+     }
+     
+
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 </style>
 <script type="text/javascript">
 
@@ -488,32 +593,77 @@ $(document).ready(function(){
   		
   		});
   	
-	$(document).on("click","#boardUpdate", funtcion(){
+	$(document).on("click","#boardUpdate", function(){
 		location.href="boardUpdate.bizpoll?bno=${boardview.bno}";
 	});
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
 	});
+	 
+	 
+
+    /* Modal 창 켜기 */
+    $("#border_in_button").click(function(){
+  	  $("#delete_modal_all").css("display","block");
+    });
+    
+    /* Modal 창 닫기 */
+    $("#modal_close_btn").click(function(){
+  	  $("#delete_modal_all").css("display","none");
+		});
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 </script>
 
 
-</head>
+</head>  
 <body id="detail_boardlist">
 <!-- 제목, 타입, 작성일자, 작성자, 좋아요, 조회수, 내용, 목록/답변버튼, 수정/삭제버튼, 첨부파일 -->
 <div id="detail_board_all">
      <div id="detail_board_in">
-     
           <!-- Q&A 게시판 -->
-          
-          
-          
-          
-          
           <c:choose>
 				<c:when test="${empty sessionScope.loginUser}">
 						<div class="detail_board_head" >
@@ -529,20 +679,6 @@ $(document).ready(function(){
 				        </div>
 				</c:otherwise>
 			</c:choose>
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
           
           
           
@@ -663,6 +799,29 @@ $(document).ready(function(){
               
      </c:otherwise>
 </c:choose>
+
+
+
+
+
+
+
+
+
+<!-- 삭제버튼 확인/취소 모달창 -->
+<div id="delete_modal_all">
+     <div id="delete_modal_line">
+			<i class="fa fa-close" id="modal_close_btn"></i>
+			<span>게시물을 삭제하시면 복구할 수 없습니다.</span>
+			<span>정말 삭제하시겠습니까?</span>
+     </div>
+</div>
+
+
+
+
+
+
 
 
 

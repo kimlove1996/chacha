@@ -26,7 +26,6 @@ public class BoardUpdatePlayAction implements Action{
 				
 				//파일업로드 처리
 				File uploadDir = new File(Constants.UPLOAD_PATH);
-				
 				if(!uploadDir.exists()) { //저장할 경로가 없다면
 					uploadDir.mkdir();    // 디렉토리를 생성하세요~
 				}
@@ -47,30 +46,55 @@ public class BoardUpdatePlayAction implements Action{
 																									//???.png에 ???1.png 이런식으로 숫자를 추가해줌.
 				
 				
-				
+				String bno = multi.getParameter("bno");
 				String title = multi.getParameter("title");
 				String content = multi.getParameter("content");
 				String writer = multi.getParameter("writer");
+				String postfile = multi.getParameter("post-file-name");
+				System.out.println(bno + ", " + title + " ," +  content + ", " + writer + ", 현 파일명: " +postfile);		
 				String filename = " "; //(공백)
 				int filesize = 0;
+				
+				
+				
+				//파일 삭제하기
+				if(postfile==postfile && postfile.length()==postfile.length()) {
+					System.out.println("같은 파일이시네요@");
+				}else {
+					System.out.println("다른 파일이시네요!");
+					File file = new File(Constants.UPLOAD_PATH + postfile);
+					file.delete();
+				}
+				//파일이름과 수정 이름이 같을 경우 현 파일을 삭제하지 않고 SQL문을 수정하여
+				// filename과 filesize를 제외한 나머지를 update 하도록 작성하면 된다.
+				
+				
+				
+				
+				//수정
+				// 1. 기존의 첨부파일 무조건 삭제하고 다음부터 시작.
 				
 				
 		/*		System.out.println("제목 = "+ title);
 				System.out.println("내용 = "+ content);
 				System.out.println("작성자 = "+ writer);*/
 				
-				System.out.println(title);
+				/*System.out.println(title);*/
 				
 				try {	//입출력은 필수적으로 트라이캐치를 해줍니다.
 					Enumeration files = multi.getFileNames(); //Enumeration = 배열 객체
-					
+					System.out.println(files);
 					while(files.hasMoreElements()) {
 						String file1 = (String)files.nextElement(); //file1 = 첫번째 첨부파일
+						System.out.println(file1);
 						filename = multi.getFilesystemName(file1);	// 첫번째 첨부파일의 파일이름을 가져오고
+						System.out.println(filename);
 						File f1 = multi.getFile(file1);				// 첫번째 첨부파일의 파일을 가져옴
+						System.out.println(f1);
 						
 						if(f1 != null) {
 							filesize = (int)f1.length(); //첨부파일의 파일사이즈 저장
+							System.out.println(filesize);
 						}
 					}
 				} catch (Exception e) {
@@ -85,14 +109,23 @@ public class BoardUpdatePlayAction implements Action{
 				BoardDAO bDao = BoardDAO.getInstance();
 				// dto 가방을 dao의 boardInsert로 보내줌.
 				
+				int bno1 = Integer.parseInt(bno);
+				
+				BoardDTO bDto = new BoardDTO(bno1, title, content, writer, filename, filesize);
 				
 				
-				BoardDTO bDto = new BoardDTO(title, content, writer, filename, filesize);
+				System.out.println("바꾼 파일사이즈 :" + bDto.getFilesize() + "바꾼 파일 명 : " +bDto.getFilename());
 				
 				
-				System.out.println(bDto.getFilesize() + bDto.getFilename());
+				
+				
+				
+				
+				
 				
 				int result = bDao.boardUpdate(bDto);
+				System.out.println("리절트 값 :" + result);
+				
 				
 				
 				if(result > 0) { //등록 성공

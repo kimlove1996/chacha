@@ -158,12 +158,12 @@ public class BoardDAO {
 	
 	
 	public int boardUpdate(BoardDTO bDto) {
-		sqlSession = sqlSessionFactory.openSession();
+		System.out.println();
 		int result = 0;
+		sqlSession = sqlSessionFactory.openSession();
 		try {
-			
-			//boardInsert = mammper로 가져가는 네임값임.
-			result = sqlSession.insert("boardUpdate", bDto);
+			result = sqlSession.update("boardUpdate", bDto);
+			System.out.println("dto까지 갔다온 리절트 값 : ");
 			sqlSession.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -171,7 +171,6 @@ public class BoardDAO {
 			sqlSession.close();
 		}
 			return result;
-		
 	}
 	
 	

@@ -142,6 +142,8 @@
 	
 	
 	<!-- 상세게시판 보기 -->
+	<!-- resultType : 실행될떄 어디에 담길건지 알려주는 것. -->
+	
 	<select id="boardDetailView" resultType = "com.chacha.dto.BoardDTO">
 	<![CDATA[
 		SELECT * FROM chachaboard
@@ -160,7 +162,7 @@
 	</update>
 	
 	
-	<insert id="boardInsert" parameterType="com.chacha.dto.BoardDTO"> <!-- insert는 무조건 int타입으로 받아서 리절트 타입을 쓰지 않아도 됨. -->
+	<insert id="boardInsert" parameterType="com.chacha.dto.BoardDTO" > <!-- insert,delete,update는 무조건 int(1)타입으로 받아서 리절트 타입을 쓰지 않아도 됨. -->
 		<choose>
 			<when test="content != null"> 
 			INSERT INTO chachaboard(bno, title, content, writer, filename, filesize)
@@ -174,11 +176,13 @@
 	</insert>
 	
 	
-	<update id="boardUpdate">
-		UPDATE chachaboard
-			SET title = #{title},
-			writer = #{writer},
-			content = #{content}
+	<update id="boardUpdate" parameterType="com.chacha.dto.BoardDTO">
+	UPDATE chachaboard SET 
+		title = #{title},
+		writer= #{writer},
+		content = #{content},
+		filename = #{filename},
+		filesize = #{filesize}
 		WHERE bno = #{bno}
 	</update>
 	

@@ -107,6 +107,8 @@
 	    display: inline-block;
 	    text-align: center;
 	    line-height: 27px;
+	    border-radius: 3px;
+	    line-height: 30px;
 	}
 	
 	.error{
@@ -174,6 +176,45 @@
 		$("#frm_bin").submit();
 		alert("보내기 성공!")
 	});
+	
+	
+	
+	$(document).on("click","#btn-file", function(){
+		$("#uploadfile").click();
+	});
+	
+	
+	$(document).on("change","#uploadfile",function(){
+		var filename = this.files[0].name;
+		$("#file-name").text(filename);
+		$("#file_close_btn").css("display","inline-block");
+	});		
+		
+		
+	$(document).on("click","#file_close_btn",function(){
+		$("#uploadfile").replaceWith($("#uploadfile").clone(true));//clone(trne)초기화
+		$("#uploadfile").val("");
+		$("#file-name").text("선택된 파일없음");
+		$("#file_close_btn").css("display","none");
+	});
+	
+	/* $(document).on("change","#uploadfile", function(){
+		var filesize = $(this)[0].files;
+		if(filesize.length < 1){
+			$("#file-name").text("선택된 파일 없음");
+			$("#close_btn").css("display","none");
+		}else{
+			var filename = this.files[0].name;
+			$("#file-name").text(filename);
+			$("#close_btn").css("display","block");
+		}
+	}); */
+	
+	
+	
+	
+	
+	
 </script>
 
 </head>
@@ -229,11 +270,14 @@
 						<th>FILE</th>
 						<td>
 							<div>
-								<input type="file" name="uploadfile" id="uploadfile">
+								<input type="file" name="uploadfile" id="uploadfile" style="display: none;">
+								<input type="button" name="btn btn-file" id="btn-file" value="파일선택">
+								<span class="file" id="file-name" style="height: 29px; border: none;">${boardview.filename}</span>
+								<i class="fa fa-close" id="file_close_btn" style="display: none;"></i>
 							</div>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>FILE2</th>
 						<td>
 							<div>
@@ -248,7 +292,7 @@
 								<input type="file" name="uploadfile" id="uploadfile">
 							</div>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<th>PASSWORD</th>
 						<td>

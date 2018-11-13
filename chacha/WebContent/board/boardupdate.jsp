@@ -174,12 +174,56 @@
 		$("#frm_bin").submit();
 		alert("보내기 성공!")
 	});
+	
+	
+
+	$(document).on("click","#btn-file", function(){
+		$("#uploadfile").click();
+	});
+	
+	
+	$(document).on("change","#uploadfile",function(){
+		var filename = this.files[0].name; //
+		var filesize = this.files[0].size;
+		if(filesize.length<1){
+			$("#file-name").text("선택된 파일없음");
+			$("#file_close_btn").css("display","none");
+		}else{
+			$("#file-name").text(filename);
+			$("#file_close_btn").css("display","inline-block");
+		}
+	});		
+		
+		
+	$(document).on("click","#file_close_btn",function(){
+		$("#uploadfile").replaceWith($("#uploadfile").clone(true));//clone(trne)초기화
+		$("#uploadfile").val("");
+		$("#file-name").text("선택된 파일없음");
+		$("#file_close_btn").css("display","none");
+	});
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </script>
 
 </head>
 <body id="boardinsert">
 <div id="boardinsert_all">
-	<form action="boardUpdatePlay.bizpoll" id="frm_bin" name="frm_bin" method="post" enctype="multipart/form-data">
+	<form action="boardUpdatePlay.bizpoll?bno=${boardview.bno}" id="frm_bin" name="frm_bin" method="post" enctype="multipart/form-data">
 	<div id="qnatitle">
 		<h1>고 객 문 의 게 시 판</h1>
 		<p>상품문의 게시판입니다.</p>
@@ -210,11 +254,7 @@
 						<td>
 							<script type="text/javascript" src="<%=path%>/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 							<textarea class="form-control" id="content" name="content" cols="160" rows="30" name="content">
-							${boardview.content}
-							
-							
-							
-							</textarea>
+							${boardview.content}</textarea>
 						</td>
 					</tr>
 					<tr>
@@ -229,11 +269,15 @@
 						<th>FILE</th>
 						<td>
 							<div>
-								<input type="file" name="uploadfile" id="uploadfile">
+								<input type="file" name="uploadfile" id="uploadfile" style="visibility: hidden;">
+								<input type="button" name="btn btn-file" id="btn-file" value="파일선택" >
+								<span class="file" id="file-name" style="height: 29px; border: none;">${boardview.filename}</span>
+								<i class="fa fa-close" id="file_close_btn" style="display: none;"></i>
+								<input type="hidden" id="post-file-name" name="post-file-name" value="${boardview.filename}">
 							</div>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>FILE2</th>
 						<td>
 							<div>
@@ -248,7 +292,7 @@
 								<input type="file" name="uploadfile" id="uploadfile">
 							</div>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<th>PASSWORD</th>
 						<td>
@@ -295,6 +339,33 @@
 			
 		</div>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
