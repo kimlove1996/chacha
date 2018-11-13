@@ -89,6 +89,8 @@ public class BoardDAO {
 	}
 	
 	
+	
+	
 	public void viewCnt(String bno, HttpSession countSession) {
 		sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -175,7 +177,21 @@ public class BoardDAO {
 	
 	
 	
-	
+	public int boardDelete(int bno) {
+		sqlSession = sqlSessionFactory.openSession();
+		int result = 0;
+		try {
+			
+			//boardInsert = mammper로 가져가는 네임값임.
+			result = sqlSession.update("boardDelete", bno);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+			return result;
+	}
 	
 	
 	

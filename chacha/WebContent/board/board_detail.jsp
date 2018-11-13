@@ -464,7 +464,7 @@
      	width: 100%;
      	height: 100%;
      	background-color: rgba(0, 0, 0, 0.4);
-     	display: block;
+     	display: none;
      }
      
      #delete_modal_line{
@@ -493,29 +493,23 @@
 	    font-size: 19px;
      }
      
-     #delete_modal_line span:nth-child(1){
-     	    position: absolute;
-		    right: 32px;
-		    top: 24px;
-		    color: #706464!important;
-		    font-size: 25px;
-		    padding: 5px;
-		    display: block;
-		    font-size: 19px;
-     }
-     #delete_modal_line span:last-child{
-     	    position: absolute;
-		    right: 32px;
-		    top: 24px;
-		    color: #706464!important;
-		    font-size: 25px;
-		    padding: 5px;
-		    display: block;
-		    font-size: 19px;
-     
+     .close_text{
+	    position: relative;
+	    top: 81px;
+	    left: 10px;
+	    padding: 5px;
+	    display: block;
+	    font-size: 19px;
+	    text-align: center;
      }
      
-     
+     #close_text01{
+     	color: #535353;
+     	font-weight: bold;
+     }
+     #close_text02{
+     	color: red;
+     }
      #modal_close_btn:hover {
      	background-color: #d4d4d4;
      	border-radius: 30px;
@@ -523,12 +517,41 @@
      
 
 	 
+	 #close_text_answer{
+		display: block;
+	    margin: 0 auto;
+	    width: 299px;
+	    position: relative;
+	    top: 116px;
+	 }
 	 
 	 
 	 
 	 
+	 .close_text_answer_yn{
+	    display: inline-block;
+	    font-size: 19px;
+	    text-align: center;
+	    clear: both;
+	    border: 1px solid gray;
+	    border-radius: 4px;
+	    width: 97px;
+	    height: 28px;
+	    line-height: 29px;
+	    cursor: pointer;
+	 }
 	 
 	 
+	 
+	 #close_text_answer_y{
+	    float: right;
+	    background-color: gray;
+	    color: white;
+	 }
+	 
+	 #close_text_answer_n{
+	 	color: #161616;
+	 }
 	 
 	 
 	 
@@ -542,15 +565,16 @@
 
 $(document).ready(function(){
 	
+  	  
+  	  
+  	  
+  	/* ============================================글쓰기 버튼===================================================== */  
 	 /* Modal 창 켜기 */
     $("#write_qna").click(function(){
   	  $("#modal_all").css("display","block");
   	  
-  	  
-  	  
-  	  
-  	  
-  	  
+    });
+  	
   	/* 로그인 버튼을 클릭했을 떄 유효성 체크 */
   	$(document).on("click","#btn_login",function(){
   		/* input의 id와 pw값을 입력. */
@@ -592,27 +616,26 @@ $(document).ready(function(){
   		}
   		
   		});
-  	
+	
+	 
+	 
+	 
+	 
+	 
+	 
+  	/* ============================================수정하기 버튼===================================================== */	 
 	$(document).on("click","#boardUpdate", function(){
 		location.href="boardUpdate.bizpoll?bno=${boardview.bno}";
 	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	});
-	 
 	 
 
+  	
+  	
+  	
+  	
+/* ============================================삭제하기 버튼===================================================== */  	
     /* Modal 창 켜기 */
-    $("#border_in_button").click(function(){
+    $("#delete_board_button").click(function(){
   	  $("#delete_modal_all").css("display","block");
     });
     
@@ -625,8 +648,28 @@ $(document).ready(function(){
 	 
 	 
 	 
+	 /* 삭제 = 예 버튼시*/
+	 $("#close_text_answer_y").click(function(){
+		 location.href="boardDeletePlay.bizpoll?bno=${boardview.bno}";
+	 });
 	 
-	 
+	 /* 삭제 = 아니오 버튼시*/
+	 $("#close_text_answer_n").click(function(){
+  	  $("#delete_modal_all").css("display","none");
+	 });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	 
 	 
 	 
@@ -734,7 +777,7 @@ $(document).ready(function(){
                                   
                                   <c:if test="${sessionScope.loginUser.id == boardview.writer}">
                                   <a href="boardUpdate.bizpoll?bno=${boardview.bno}" type="button" class="border_in_button" id=""> 수정</a>
-                                  <a href="#" type="button" class="border_in_button"> 삭제</a>
+                                  <a href="#" type="button" class="border_in_button" id="delete_board_button"> 삭제</a>
                              	  </c:if>
                              </div>
                         </div>
@@ -812,8 +855,13 @@ $(document).ready(function(){
 <div id="delete_modal_all">
      <div id="delete_modal_line">
 			<i class="fa fa-close" id="modal_close_btn"></i>
-			<span>게시물을 삭제하시면 복구할 수 없습니다.</span>
-			<span>정말 삭제하시겠습니까?</span>
+				<span id="close_text01" class="close_text">게시물을 삭제하시면 복구할 수 없습니다.</span>
+				<span id="close_text02"  class="close_text">정말 삭제하시겠습니까?</span>
+				
+				<div id="close_text_answer">
+					<div class="close_text_answer_yn" id="close_text_answer_y">네</div>
+					<div class="close_text_answer_yn" id="close_text_answer_n">아니오</div>
+				</div>	
      </div>
 </div>
 

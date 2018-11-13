@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chacha.action.Action;
 import com.chacha.action.ActionForward;
+import com.chacha.action.BoardDeletePlayAction;
 import com.chacha.action.ConstracAction;
 import com.chacha.action.IndexAction;
 import com.chacha.action.LoginOutPlayAction;
@@ -161,6 +162,10 @@ public class BizpollFrontController extends HttpServlet {
 		}else if(command.equals("/boardUpdatePlay.bizpoll")) {
 			System.out.println("수정을 끝내려고 버튼을 눌렀어요~~");
 			action = new BoardUpdatePlayAction();//객체 생성		
+			forward = action.excute(request, response); // 객체(인스턴스)사용
+		}else if(command.equals("/boardDeletePlay.bizpoll")) {
+			System.out.println("게시물 삭제시  예 버튼을 눌렀어요!");
+			action = new BoardDeletePlayAction();//객체 생성		
 			forward = action.excute(request, response); // 객체(인스턴스)사용
 		}
 		

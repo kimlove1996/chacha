@@ -189,6 +189,15 @@
 	
 	
 	
+	<delete id="boardDelete" parameterType="com.chacha.dto.BoardDTO">
+		DELETE FROM chachaboard
+		WHERE bno = #{bno}
+	</delete>
+	
+	
+	
+	
+	
 </mapper>
 	
 
