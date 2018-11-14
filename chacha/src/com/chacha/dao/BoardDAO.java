@@ -77,6 +77,8 @@ public class BoardDAO {
 	public BoardDTO boardDetailView(String bno){
 		sqlSession = sqlSessionFactory.openSession();	
 		BoardDTO bDto = null;
+		
+		
 		try {
 			bDto = sqlSession.selectOne("boardDetailView", bno);
 		} catch (Exception e) {

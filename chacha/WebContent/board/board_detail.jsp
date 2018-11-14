@@ -55,12 +55,13 @@
      }
      
      .detail_board_head a{
-     	float: right;
+	    float: right;
 	    padding: 9px 27px;
 	    border: 1px solid #c4c4c4;
-	    border-radius: 5px;
+	    border-radius: 9px;
 	    color: #ffffff;
 	    background-color: #c4c4c4;
+	    border: 7px double white;
      }
      
      .detail_board_head h1{
@@ -120,6 +121,7 @@
 	    right: 20px;
 	    font-size: 25px;
 	    color: red;
+	    cursor: pointer;
      }
      
      #nameboard span:nth-child(4){
@@ -491,6 +493,7 @@
 	    padding: 5px;
 	    display: block;
 	    font-size: 19px;
+	    cursor: pointer;
      }
      
      .close_text{

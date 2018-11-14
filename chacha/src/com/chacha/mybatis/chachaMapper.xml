@@ -180,9 +180,11 @@
 	UPDATE chachaboard SET 
 		title = #{title},
 		writer= #{writer},
-		content = #{content},
+	<if test="filename != 'no'">
 		filename = #{filename},
-		filesize = #{filesize}
+		filesize = #{filesize},
+	</if>	
+		content = #{content}
 		WHERE bno = #{bno}
 	</update>
 	
