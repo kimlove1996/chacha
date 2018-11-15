@@ -35,4 +35,25 @@ public class ReplyDAO {
 		return list;
 	}
 	
+	
+	
+	public ReplyDTO replyDelete(String bno){
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			sqlSession.delete("deleteReply", bno);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

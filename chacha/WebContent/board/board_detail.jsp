@@ -303,7 +303,13 @@
 	 	padding: 9px 0px 8px 11px;
 	 }
 	 
-	 #writed_reply_his span:nth-child(1) {
+	 #writed_reply_his span:nth-child(1){
+	    font-size: 12px;
+	    font-weight: bold;
+	    color: #8d8d8d;
+	 }
+	 
+	 #writed_reply_his span:nth-child(2) {
 		padding: 9px 0px 8px 2px;
 		font-weight: bold;
 	 }
@@ -563,7 +569,16 @@
 	 
 	 
 	 
-	 
+	.noreply_text{
+		position: relative;
+	    bottom: 10px;
+	    left: 10px;
+	}
+	.reply_delete{
+		font-size: 13px;
+	    font-weight: bold;
+	    color: red;
+	}
 	 
 	 
 </style>
@@ -665,9 +680,57 @@ $(document).ready(function(){
 	 });
     
     
+	 
+	 
+	 
+	 
+	 $(document).on("click",("#reply_delete_button"), function(){
+	 		var rno = $(this).attr("data_num");
+			
+			
+				$.ajax({
+					url:"replyDelet.bizpoll",
+					data: "rno=" + rno,
+					success: function(result){
+						comment_list();
+					},
+					error: function(){
+						alert("System Error!!!");
+					}
+				});
+			
+			
+			
+			
+	});
+	 
+	 
+	 
+					
+	 
+
+	 
+	 
+	 
+	 
+	 
+	 
     
     
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 	$(document).ready(function(){
     /* 문서가 준비되면 댓글 목록을 조회하는 AJAX 실행*/
 		comment_list();		// 이(아래) 함수를 실행하라. 
@@ -685,7 +748,7 @@ $(document).ready(function(){
 	}
 
 
-
+	
 
 
 
@@ -817,9 +880,8 @@ $(document).ready(function(){
 									<div id="write_reply">
 				                   			<span>${sessionScope.loginUser.name}</span>
 				                   			<span>등록하기</span>
-				                   				<textarea id="write_reply_in" name="border_reply"></textarea>
+				                   				<textarea id="write_reply_in" name="border_reply" style="resize: none;"></textarea>
 				                    </div>
-				
 					</c:otherwise>
 				</c:choose>
 

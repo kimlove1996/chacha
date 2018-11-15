@@ -202,15 +202,18 @@
 	
 <!-- ======================================================================== -->
 
-<select id="replyListAll" parameterType="String" resultType="com.chacha.dto.ReplyDTO">
-	SELECT * FROM chachareply
-	WHERE bno = #{bno}
-	ORDER BY rno ASC
-</select>
-	
-	
-	
-	
+	<select id="replyListAll" parameterType="String" resultType="com.chacha.dto.ReplyDTO">
+		SELECT * FROM chachareply
+		WHERE bno = #{bno}
+		ORDER BY rno ASC
+	</select>
+	 	
+		
+	<delete id="deleteReply" parameterType="String">
+		DELETE FROM chachareply
+		WHERE rno = #{rno}
+	</delete>
+		
 	
 	
 	

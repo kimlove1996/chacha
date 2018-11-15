@@ -21,6 +21,7 @@ import com.chacha.action.MemberUpdateAction;
 import com.chacha.action.MemberUpdatePlayAction;
 import com.chacha.action.MemberUpdatepwPlayAction;
 import com.chacha.action.PwCheckAction;
+import com.chacha.action.ReplyDeletePlayAction;
 import com.chacha.action.BoardDetailAction;
 import com.chacha.action.BoardDownloadAction;
 import com.chacha.action.BoardListAction;
@@ -172,7 +173,13 @@ public class BizpollFrontController extends HttpServlet {
 			System.out.println("댓글 부위를 따로 나눈 곳으로 이동할게요!~");
 			action = new CommentListAction();//객체 생성		
 			forward = action.excute(request, response); // 객체(인스턴스)사용
+		}else if(command.equals("/replyDelet.bizpoll")) {
+			System.out.println("댓글을 지우러 왔어요!");
+			action = new ReplyDeletePlayAction();//객체 생성		
+			forward = action.excute(request, response); // 객체(인스턴스)사용
 		}
+		
+	
 		
 
 		
