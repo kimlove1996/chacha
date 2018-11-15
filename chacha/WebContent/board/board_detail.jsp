@@ -221,6 +221,7 @@
 	    border-bottom: 1px solid #e7e7e7;
 	    background-color: #ededed;
 	    line-height: 22px;
+	    margin-bottom: 24px;
      }
      
      
@@ -244,7 +245,7 @@
      /* 댓글 무, 로그인필요 */
      #writed_reply{
 	    margin: 10px auto;
-	    margin-top: 39px;
+	    margin-top: 11px;
 	    width: 97%;
 	    border: 1px solid #cfcfcf;
 	    border-radius: 5px;
@@ -307,10 +308,12 @@
 		font-weight: bold;
 	 }
 	 
-	 #writed_reply_his span:nth-child(2) {
-	    font-size: 12px;
+	 #reply_regdate {
+		font-size: 12px;
 	    font-weight: bold;
-	    color: red;
+	    float: right;
+	    padding-right: 11px;
+	    color: #aaaaaa;
 	 }
 	 
 	 #writed_reply_his span:nth-child(3) {
@@ -664,23 +667,22 @@ $(document).ready(function(){
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	 
-	 
-	 
-	 
-	 
 });
+	$(document).ready(function(){
+    /* 문서가 준비되면 댓글 목록을 조회하는 AJAX 실행*/
+		comment_list();		// 이(아래) 함수를 실행하라. 
+	});
 
-
+	function comment_list(){
+		$.ajax({
+			type: "post",
+			url:"commentlist.bizpoll",
+			data: "bno=${boardview.bno}",
+			success: function(result){
+				$("#commentList").html(result);
+			}
+		});
+	}
 
 
 
@@ -710,6 +712,14 @@ $(document).ready(function(){
 <div id="detail_board_all">
      <div id="detail_board_in">
           <!-- Q&A 게시판 -->
+          
+          
+          
+         
+          
+          
+          
+          
           <c:choose>
 				<c:when test="${empty sessionScope.loginUser}">
 						<div class="detail_board_head" >
@@ -737,9 +747,10 @@ $(document).ready(function(){
                         <span>${boardview.writer}</span>
                        	<span class="fa fa-gittip"></span>
                        	<span>공감합니다</span>
-                        
-                        
                    </div>
+                   
+                   
+                   
                    
                    <div id="board_title">
                         <span>[${boardview.bno}]번째 글<img src=""></span>
@@ -779,72 +790,40 @@ $(document).ready(function(){
                                   <a href="#" type="button" class="border_in_button"> 답변</a>
                                   
                                   <c:if test="${sessionScope.loginUser.id == boardview.writer}">
-                                  <a href="boardUpdate.bizpoll?bno=${boardview.bno}" type="button" class="border_in_button" id=""> 수정</a>
-                                  <a href="#" type="button" class="border_in_button" id="delete_board_button"> 삭제</a>
+	                                  <a href="boardUpdate.bizpoll?bno=${boardview.bno}" type="button" class="border_in_button" id=""> 수정</a>
+	                                  <a href="#" type="button" class="border_in_button" id="delete_board_button"> 삭제</a>
                              	  </c:if>
                              </div>
                         </div>
-              </div>
+             	 </div>
  
+ 
+ 
+ 
+ 
+ 				 <div id="commentList"> <!-- 이안으로 ajax를 이용하여 쉽게 생각하면 include했다고 생각하면 됨. -->
+         		 </div>
 
 
 
-<c:choose>
-     <c:when test="${empty sessionScope.loginUser}">
-              <div id="detail_board_reply01">
-                   <div id="detail_board_reply">
-                        <div id="detail_board_reply_top">
-                             <span>댓글1</span>
-                        </div>
-                        
-                        
-                        
-                        <div id="writed_reply">
-                             <div id="writed_reply_his">
-                                  <span>짱이쁜이</span>
-                                  <span>삭제</span>
-                                  <span>작성일 : 2018.01.01 21:23</span>
-                             </div>
-                             <div id="writed_reply_in">
-                                  <span>야 it쪽 코인 떡상 각이냐?</span>
-                             </div>
-                        </div>
-                   </div>
-              
-              
-              
-                   <div id="write_reply">
-                  	 <p>로그인을 하시면 덧글을 작성할 수 있습니다.</p>
-                   </div>
-                   
-                   <div class="clr"></div>
-                   
-                   
-                   
-                   
-              </div>        
-                   
-     </c:when>
-     
-     <c:otherwise>
-              <div id="detail_board_reply02">
-                   <div id="detail_board_reply">
-                        <div id="detail_board_reply_top">
-                             <span>댓글0</span>
-                        </div>
-                   </div>
-              
-              
-                   <div id="write_reply">
-                   			<span>${sessionScope.loginUser.name}</span>
-                   			<span>등록하기</span>
-                   				<textarea id="write_reply_in" name="border_reply"></textarea>
-                   		
-                   </div>
-              </div>
-              
-     </c:otherwise>
-</c:choose>
+
+				 <c:choose>
+				     <c:when test="${empty sessionScope.loginUser}">
+								    <div id="write_reply">
+				                  	 <p>로그인을 하시면 덧글을 작성할 수 있습니다.</p>
+				                    </div>
+					</c:when>
+					<c:otherwise>
+									<div id="write_reply">
+				                   			<span>${sessionScope.loginUser.name}</span>
+				                   			<span>등록하기</span>
+				                   				<textarea id="write_reply_in" name="border_reply"></textarea>
+				                    </div>
+				
+					</c:otherwise>
+				</c:choose>
+
+
 
 
 
