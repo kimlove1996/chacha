@@ -567,6 +567,7 @@
 								</c:if>
 									<i class="fa fa-github-alt"></i><p>${bDto.viewcnt}</p>
 									<i class="fa fa-gittip"></i><p>${bDto.goodcnt}</p>
+									 <p>댓글 수 : ${replyList.size()}</p>
 						</td>
 						
 						

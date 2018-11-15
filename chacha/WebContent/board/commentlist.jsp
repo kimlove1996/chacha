@@ -58,7 +58,9 @@
                   		 <div id="writed_reply">
                              <div id="writed_reply_his">
                                   <span>${replyview.writer}</span>
-                                  <span id="reply_regdate">작성일 : ${replyview.regdate}</span>
+                                  <span id="reply_regdate">
+                                  <fmt:formatDate pattern="작성일 : yyyy/MM/dd h:mm:ss" value="${replyview.regdate}"/>
+                                  </span>
                              </div>
                              
                              

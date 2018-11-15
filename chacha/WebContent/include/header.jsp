@@ -102,7 +102,6 @@
      box-sizing: border-box;
 }
 #header_chacha1_in {
-     width: 1925px;
      margin: 0 auto;
 }
 #header_chacha1_ul {

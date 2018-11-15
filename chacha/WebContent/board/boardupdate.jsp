@@ -155,10 +155,25 @@
 	    cursor: pointer;
 	}
 	
-	
+	#file_close_btn{
+		cursor: pointer;
+	}
 	
 </style>
 <script type="text/javascript">
+
+
+//파일이 있는 게시물이라면 X아이콘이 있어야 한다.
+$(document).ready(function(){
+	
+	if("${boardview.filesize}"!="0"){
+		$("#file_close_btn").css("display","inline-block");
+	}
+});
+
+
+
+// 수정하기 눌렀을 때
 	$(document).on("click","#update", function(elClickedObj){
 			alert("훔...?")
 		var title = $("#title").val();
@@ -178,31 +193,14 @@
 	});
 	
 	
-
+	
+// 파일선택 버튼 눌렀을 때
 	$(document).on("click","#btn-file", function(){
 		$("#uploadfile").click();
 	});
 	
 	
-/* 	$(document).on("change","#uploadfile",function(){
-		var filename = this.files[0].name; //
-		var filesize = this.files[0].size;
-		if(filesize.length<1){
-			$("#file-name").text("선택된 파일없음");
-			$("#file_close_btn").css("display","none");
-		}else{
-			$("#file-name").text(filename);
-			$("#file_close_btn").css("display","inline-block");
-		}
-	});		 */
-		
-		
-	
-	
-	
-	
-	
-	
+// 파일 변경될 시
 	$(document).on("change","#uploadfile", function(){
 		var filesize = $(this)[0].files; /* File( 들 )을 첨부할 수 있으니 배열타입의 값을 담아놓는다. */
 		if(filesize.length < 1){ //파일이 안들어왔을 경우.
@@ -234,15 +232,7 @@
 	});
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+//fafa 닫기 아이콘을 눌렀을 때.
 	$(document).on("click","#file_close_btn",function(){
 		$("#uploadfile").replaceWith($("#uploadfile").clone(true));//clone(trne)초기화
 		$("#uploadfile").val("");
@@ -255,9 +245,23 @@
 	
 	
 	
-
 	
 	
+	
+	
+/*	$(document).on("change","#uploadfile",function(){
+		var filename = this.files[0].name; //
+		var filesize = this.files[0].size;
+		if(filesize.length<1){
+			$("#file-name").text("선택된 파일없음");
+			$("#file_close_btn").css("display","none");
+		}else{
+			$("#file-name").text(filename);
+			$("#file_close_btn").css("display","inline-block");
+		}
+	});
+	
+*/	
 	
 	
 	

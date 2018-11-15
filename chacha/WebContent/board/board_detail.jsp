@@ -244,20 +244,19 @@
      
      /* 댓글 무, 로그인필요 */
      #writed_reply{
-	    margin: 10px auto;
+		margin: 10px auto;
 	    margin-top: 11px;
 	    width: 97%;
 	    border: 1px solid #cfcfcf;
 	    border-radius: 5px;
-	    height: 126px;
 	    background-color: #ededed;
+	    padding-bottom: 10px;
      }
      
      #writed_reply_in{
 	    border: 1px solid #ededed;
 	    width: 96%;
 	    margin: 0 auto;
-	    height: 53px;
 	    border-radius: 5px;
 	    background-color: white;
 	    padding: 14px;
@@ -310,7 +309,7 @@
 	 }
 	 
 	 #writed_reply_his span:nth-child(2) {
-		padding: 9px 0px 8px 2px;
+		padding: 9px 11px 8px 2px;
 		font-weight: bold;
 	 }
 	 
