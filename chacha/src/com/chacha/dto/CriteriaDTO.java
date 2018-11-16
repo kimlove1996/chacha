@@ -6,7 +6,8 @@ public class CriteriaDTO {
 	private int perPageNum; // 한페이지에 보여줄 게시글 수
 	private String keyword;  
 	private String flag;	
-
+	private String code;
+	
 	public CriteriaDTO() {	//직접작성하였음.
 		this.page = 1;
 		this.perPageNum = 10;
@@ -18,16 +19,29 @@ public class CriteriaDTO {
 		this.perPageNum = perPageNum;
 		this.keyword = keyword;
 	}
+	
+	
+	public CriteriaDTO(int page, int perPageNum, String keyword, String flag, String code) {
+		super();
+		this.page = page;
+		this.perPageNum = perPageNum;
+		this.keyword = keyword;
+		this.flag = flag;
+		this.code = code;
+	}
 
 	public int getPage() {
 		return page;
 	}
 
 	public void setPage(int page) {
+		
+		//page가 0보다 작거나 같으면 1page로 적용합니다.
 		if(page <= 0) {
 			this.page = 1;
 			return;
 		}
+		//0보다 작지 않다면 현page변수에 받아온 page의 값을 넣습니다. 이렇게하면 DTO에는 현재 페이지 값이 들어있겠죠?
 		this.page = page;
 	}
 
@@ -62,6 +76,14 @@ public class CriteriaDTO {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	

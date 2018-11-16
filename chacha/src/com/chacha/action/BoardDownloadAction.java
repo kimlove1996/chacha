@@ -16,20 +16,22 @@ public class BoardDownloadAction implements Action{
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String url = "";
+		System.out.println("경로 없음@");
 		
 		
 		String filename = request.getParameter("file"); //파일을 받아서 
 		System.out.println("파일이름:" + filename);
 		
+				
 		
 		String path = Constants.UPLOAD_PATH + filename; //경로(path)를 constants.upload_path로 찾아가서 받음
 		//D:\\upload.???.png
 		byte b[] = new byte[4096]; // 바이트 배열 생성
 		
 		
+		
 		//서버에 저장된 파일을 읽기위한 스트림 생성
 		FileInputStream fis = new FileInputStream(path);
-		
 		
 		// 파일의 종류(mimeType)
 		String mimeType = request.getServletContext().getMimeType(path);

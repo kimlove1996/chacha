@@ -131,7 +131,20 @@
 			                <if test='flag == "4"'>
 			                <![CDATA[AND writer LIKE '%'||#{keyword}||'%']]> <!-- 작성자 -->
 			                </if>
-		<![CDATA[	                ORDER BY bno DESC
+			                
+			                <if test='"code" == "new"'>
+			                	ORDER BY bno DESC
+			                </if>
+			                <if test='"code" == "good"'>
+			                	ORDER BY goodcnt DESC, bno DESC
+			                </if>
+			                <if test='"code" == "reply"'>
+			                	ORDER BY replycnt DESC, bno DESC
+			                </if>
+			                <if test='"code" == "cnt"'>
+			                	ORDER BY viewcnt DESC, bno DESC
+			                </if>
+		<![CDATA[	         
 			                ) a
 		        )
 		WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}
@@ -219,6 +232,13 @@
 		INSERT INTO chachareply(rno,content,writer,bno)
 		VALUES(seq_chachareply_rno.NEXTVAL, #{content},#{writer},#{bno})
 	</insert>
+	
+<!-- 	<update id="replyplus" parameterType="com.chacha.dto.ReplyDTO">
+		UPDATE chachareply SET
+		WHERE 
+	</update>
+ -->	
+	
 	
 	
 </mapper>

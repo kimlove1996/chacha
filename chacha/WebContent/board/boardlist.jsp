@@ -341,6 +341,29 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
+		//정렬 시 색상
+		
+		//${code}를 Action단에서 보내면
+		
+		//화면단에서 input태그로 받고,
+		
+		
+		
+		var code = $("#code").val();
+		if(code == "new"){
+			$("#orderNew").css("color","#E71D36").css("font-weight","bold").css("text-decoraton","none");
+		}
+		if(code == "good"){
+			$("#orderGood").css("color","#E71D36").css("font-weight","bold").css("text-decoraton","none");
+		}
+		if(code == "reply"){
+			$("#orderReply").css("color","#E71D36").css("font-weight","bold").css("text-decoraton","none");
+		}
+		if(code == "cnt"){
+			$("#orderCnt").css("color","#E71D36").css("font-weight","bold").css("text-decoraton","none");
+		}
+		
+		
 		
 		$("#find").click(function(){
 		var flag = $("#selected").val();
@@ -438,7 +461,7 @@
 </head>
 <body id="product_qna">
 	<div id="qna_all">
-	<form action="boardWriter.bizpoll" method="post" entype="multipart/form-data">
+	<form action="boardWriter.bizpoll" method="post"enctype="multipart/form-data">
 			<div id="qnatitle">
 				<h1>고객문의게시판</h1>
 				<p>상품 Q&A입니다.</p>
@@ -456,6 +479,13 @@
 							답변완료 글보기
 					</option>
 				</select>
+				
+				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=new" id="orderNew">최신순</a>
+				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=good" id="orderGood">추천순</a>
+				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=reply" id="orderReply">댓글순</a>
+				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=cnt" id="orderCnt">조회순</a>
+				
+				
 				
 				<div id="qna_type" >
 				       
@@ -502,8 +532,8 @@
 				
 				
 				<input type="text" id="insert_input" name="keyword">
-				<a href="#" id="find">찾기</a>
-				
+				<a id="find">찾기</a>
+
 				
 				
 				
@@ -567,7 +597,9 @@
 								</c:if>
 									<i class="fa fa-github-alt"></i><p>${bDto.viewcnt}</p>
 									<i class="fa fa-gittip"></i><p>${bDto.goodcnt}</p>
-									 <p>댓글 수 : ${replyList.size()}</p>
+								<c:if test="${bDto.replycnt>0}">
+									 <p>댓글 수 : ${bDto.replycnt}</p>
+								</c:if>
 						</td>
 						
 						
@@ -622,7 +654,7 @@
 			
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 					
-						<a href="boardList.bizpoll?page=${idx}&flag=${flag}&keyword=${keyword}" <c:out value="${pageMaker.criDto.page == idx? 'class=active':''}"/>>${idx}</a>
+						<a href="boardList.bizpoll?page=${idx}&flag=${flag}&keyword=${keyword}&key=${code}" <c:out value="${pageMaker.criDto.page == idx? 'class=active':''}"/>>${idx}</a>
 					
 				</c:forEach>
 				
@@ -633,12 +665,11 @@
 				
 				
 				
-				
+				<input type="hidden" id="code" value="${code}">
 				
 				
 				</form>
 		</div>
-	</div>
 
 
 </body>

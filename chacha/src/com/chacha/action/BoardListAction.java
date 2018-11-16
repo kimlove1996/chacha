@@ -32,11 +32,26 @@ public class BoardListAction implements Action{
 		// keyword와 tyep으로 검색된 게시글 리스트가 출력.
 		CriteriaDTO criDto = new CriteriaDTO();
 		int page = 1;
+		
+		// 페이지 값이 비지 않았을 경우 request로 받은 page 넘버를 page에 입력합니다.
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		System.out.println("페이지 번호 : " + page);
+		//현 page 번호를 criDto.setPage로 보내 값을 저장시킵니다.
 		criDto.setPage(page);
+		
+		//코드에는 new라는 값을 담아놨습니다.
+		String code = "new";
+		
+		//key를 받아왔을 떄 값이 비어있지 않다면,
+		if(request.getParameter("key") != null) {
+			System.out.println("키에 값이 들어있오요!");
+			// 
+			code = request.getParameter("key");
+		}
+		criDto.setCode(code);
+		request.setAttribute("code", code); //핵심. key(중요값)값을 주고 받고 해야만 한다.
 		
 		String flag = null;
 		String keyword = null;
