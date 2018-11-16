@@ -21,6 +21,7 @@ public class ReplyDAO {
 	}
 	
 	
+	// 댓글 리스트 뽑기
 	public List<ReplyDTO> replyListAll(String bno){
 		List<ReplyDTO> list = null;
 		sqlSession = sqlSessionFactory.openSession();
@@ -36,7 +37,7 @@ public class ReplyDAO {
 	}
 	
 	
-	
+	// 댓글 삭제
 	public ReplyDTO replyDelete(String bno){
 		sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -51,8 +52,19 @@ public class ReplyDAO {
 	}
 	
 	
-	
-	
+	//댓글 입력
+	public ReplyDTO replyInsert(ReplyDTO rDto) {
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			sqlSession.insert("insertReply", rDto);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return null;
+	}
 	
 	
 	

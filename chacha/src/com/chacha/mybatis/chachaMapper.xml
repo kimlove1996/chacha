@@ -215,8 +215,10 @@
 	</delete>
 		
 	
-	
-	
+	<insert id="insertReply" parameterType="com.chacha.dto.ReplyDTO">
+		INSERT INTO chachareply(rno,content,writer,bno)
+		VALUES(seq_chachareply_rno.NEXTVAL, #{content},#{writer},#{bno})
+	</insert>
 	
 	
 </mapper>

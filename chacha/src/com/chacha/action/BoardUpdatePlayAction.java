@@ -60,6 +60,7 @@ public class BoardUpdatePlayAction implements Action{
 				// 값이 없으면 0 부여, 값이 있으면 숫자로 변환.
 				int nowFileSize = 0;
 				if(!nFileSize.equals("")) {
+					System.out.println("파일 사이즈 없음!");
 					nowFileSize = Integer.parseInt(nFileSize);
 				}
 				

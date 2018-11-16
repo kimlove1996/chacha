@@ -165,10 +165,18 @@
 
 //파일이 있는 게시물이라면 X아이콘이 있어야 한다.
 $(document).ready(function(){
+	var filesize = $(this)[0].files;
+	
+	
+	
 	
 	if("${boardview.filesize}"!="0"){
 		$("#file_close_btn").css("display","inline-block");
 	}
+	
+	
+	
+	
 });
 
 
@@ -180,16 +188,19 @@ $(document).ready(function(){
 		//스마트에디터로 content부분 값 넘겨받는 부분
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		
+		//제목을 입력하지 않으면 경고문 block
 		if(title == ""){
 			alert("제목없음~")
 			$("#title").focus();
 			$(".error").css("display","inline-block");
 			return false;
 		}
+		
+		//현재 파일
 		var nowfile = $("#file-name").text();
 		$("#now-file-name").val(nowfile);
 		$("#frm_bin").submit();
-		alert("보내기 성공!")
+		alert(nowfile + "보내기 성공!")
 	});
 	
 	
@@ -203,6 +214,7 @@ $(document).ready(function(){
 // 파일 변경될 시
 	$(document).on("change","#uploadfile", function(){
 		var filesize = $(this)[0].files; /* File( 들 )을 첨부할 수 있으니 배열타입의 값을 담아놓는다. */
+		
 		if(filesize.length < 1){ //파일이 안들어왔을 경우.
 			$("#file-name").text("선택된 파일 없음.");
 			$("#file_close_btn").css("display", "none");
@@ -210,16 +222,15 @@ $(document).ready(function(){
 			/*  첨부파일이 있다면 첨부파일의 이름과 사이즈를 불러옴. */
 			var filename = this.files[0].name;
 			var filesize = this.files[0].size;
-			
 			var maxSize = 10 * 1024 * 1024; /* 10메가 바이트로 용량 제한.*/
 			
-			if(size > maxSize){ //용량 제한 걸림.
+			if(filesize > maxSize){ //용량 제한 걸림.
 				alert("첨부파일 사이즈는 10MB 이내로 등록 가능합니다.");
 				$("#file-name").text("선택된 파일 없음.");
 				
 				/* 화면단에서는 input type = "file"용량을 제한하는 코드가 없습니다. 
 					따라서 경고창은 뜨나 실제 10mb 넘는 파일이 들어가 있는 상태가 됩니다.
-					만드시 초기화를 시켜 없애는 과정이 필요합니다. =>만약 과정을 거치지 않는 경우 Action단위에서 오류 발생.*/
+					반드시 초기화를 시켜 없애는 과정이 필요합니다. =>만약 과정을 거치지 않는 경우 Action단위에서 오류 발생.*/
 				$("#uploadfile").val("");
 				$("#now-file-size").val(0);
 			}else{//첨부 가능.
@@ -230,6 +241,7 @@ $(document).ready(function(){
 		}
 		
 	});
+			alert(filename + maxSize);
 	
 	
 //fafa 닫기 아이콘을 눌렀을 때.

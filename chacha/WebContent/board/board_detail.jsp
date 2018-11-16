@@ -166,7 +166,7 @@
      }
      
      #board_in{
-          margin-top: 30px;
+          margin-top: 11px;
      }
      #board_in_icon{
 	    border-top: 1px solid #f1ebeb;
@@ -260,6 +260,7 @@
 	    border-radius: 5px;
 	    background-color: white;
 	    padding: 14px;
+	    font-size: 14px;
      }
      
      #writed_reply_in > input{
@@ -309,8 +310,8 @@
 	 }
 	 
 	 #writed_reply_his span:nth-child(2) {
-		padding: 9px 11px 8px 2px;
-		font-weight: bold;
+	    font-weight: bold;
+	    font-size: 14px;
 	 }
 	 
 	 #reply_regdate {
@@ -352,19 +353,19 @@
 	 
 	 #write_reply{
 	 	border: 7px double #cfcfcf;
-	    height: 119px;
 	    border-radius: 5px;
 	    margin-top: 14px;
 	    padding: 19px;
 	    background-color: #f4f4f4;
-	    padding-bottom: 31px;
+	    padding-bottom: 12px;
 	 }
 	 
-	 #write_reply > span:nth-child(1){
-	 	 font-weight: bold;
-   		 color: #6a716a;
+	 #writer_id{
+	    font-weight: bold;
+	    color: #1a1a1a;
+	    padding-left: 3px;
 	 }
-	 #write_reply > span:nth-child(2){
+	 #reply_button{
 	    border: 1px solid #c3c3c3;
 	    border-radius: 5px;
 	    color: white;
@@ -387,14 +388,15 @@
 	 
 	 
 	 #write_reply_in{
-		border: 1px solid #cfcfcf;
-	    height: 93px;
+	    border: 1px solid #cfcfcf;
+	    height: 56px;
 	    margin-top: 10px;
 	    border-radius: 5px;
 	    background-color: white;
 	    display: block;
-	    width: 100%;
-	    outline: 0;
+	    padding: 18px;
+	    width: 97%;
+	    clear: both;
 	 }
 	 
 	 
@@ -574,10 +576,21 @@
 	    left: 10px;
 	}
 	.reply_delete{
-		font-size: 13px;
+		font-size: 11px;
 	    font-weight: bold;
 	    color: red;
 	}
+	 
+	 
+	#no_text{
+		color: red;
+	    font-size: 14px;
+	    display: none;
+	    font-weight: bold;
+	} 
+	 
+	 
+	 
 	 
 	 
 </style>
@@ -747,10 +760,39 @@ $(document).ready(function(){
 	}
 
 
+	$(document).on("click","#reply_button",function(){
+		var reply_content = $("#write_reply_in").val();
+		alert(reply_content);
+		
+		if(reply_content == ""){
+			$("#write_reply_in").focus();
+			$("#no_text").css("display","block");
+			return false;
+		}else{
+			var bno = ${boardview.bno};
+			$("#re_bno").val(bno);
+			alert(bno) //게시물 번호
+		}
+		
+		
+		$.ajax({
+			url:"replyInsert.bizpoll",
+			/* 폼태그로  data값을 보낼 것임. */
+			data: $("#frm_reply").serialize(), //serialize = 직렬화(데이터를 한번에 보낼 수 없어 조금씩 내용물(블럭)을 분리하여 전송하는 방법.)
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(){
+				comment_list();
+				$("#write_reply_in").val("");
+			},
+			error: function(){
+				alert("System Error!!!");
+			}
+		});
+		
+		
+	});
 	
-
-
-
+	
 
 
 
@@ -779,7 +821,7 @@ $(document).ready(function(){
           
          
           
-          
+         
           
           
           <c:choose>
@@ -815,7 +857,7 @@ $(document).ready(function(){
                    
                    
                    <div id="board_title">
-                        <span>[${boardview.bno}]번째 글<img src=""></span>
+                        <span>[${boardview.bno}] 번째 글<img src=""></span>
                         <span>
                        		<fmt:formatDate pattern="작성일 : yyyy/MM/dd h:mm:ss" value="${boardview.regdate}"/>
                         </span>
@@ -865,24 +907,11 @@ $(document).ready(function(){
  
  				 <div id="commentList"> <!-- 이안으로 ajax를 이용하여 쉽게 생각하면 include했다고 생각하면 됨. -->
          		 </div>
+			
 
 
 
-
-				 <c:choose>
-				     <c:when test="${empty sessionScope.loginUser}">
-								    <div id="write_reply">
-				                  	 <p>로그인을 하시면 덧글을 작성할 수 있습니다.</p>
-				                    </div>
-					</c:when>
-					<c:otherwise>
-									<div id="write_reply">
-				                   			<span>${sessionScope.loginUser.name}</span>
-				                   			<span>등록하기</span>
-				                   				<textarea id="write_reply_in" name="border_reply" style="resize: none;"></textarea>
-				                    </div>
-					</c:otherwise>
-				</c:choose>
+				
 
 
 
