@@ -19,9 +19,6 @@ a {
 ul {
      list-style-type: none;
 }
-input{
-	outline-width: 0;
-}
 /* 상단 차차로고 */
 #header {
      position: relative;

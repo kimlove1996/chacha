@@ -15,8 +15,8 @@ public class MemberUpdatePlayAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "";
 		HttpSession session = request.getSession();
+		String url = "";
 		
 		
 		// View단에서 전송한 데이터를 받아오기

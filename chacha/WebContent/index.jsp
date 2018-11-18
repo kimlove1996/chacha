@@ -19,9 +19,6 @@
 	}
 	
 	
-	input{
-	outline: 0px;
-	}
 	
 	ul,li{
 		list-style-type: none;

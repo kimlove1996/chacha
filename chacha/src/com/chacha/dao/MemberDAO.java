@@ -95,7 +95,7 @@ public class MemberDAO {
 			mDto.setPw(userpw);
 			try {
 				result = sqlSession.selectOne("confirmPW",mDto);
-				
+				System.out.println("비밀번호 중복 유무 : " + result);
 				if(result != null) {
 					result = "-1";
 				}else {
@@ -191,8 +191,9 @@ public class MemberDAO {
 			int flag = 0;
 			sqlSession = sqlSessionFactory.openSession();
 			try {
-				flag = sqlSession.delete(userid);
-				sqlSession.delete("deleteMember",userid);
+				 flag = sqlSession.delete("deleteMember",userid);
+				sqlSession.commit();
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally {

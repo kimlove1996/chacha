@@ -6,22 +6,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MemberDeleteAction implements Action{
+public class TunningAction implements Action{
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "member_delete.jsp";
-		
-		
+		String url = "welcom.jsp";
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);
 		forward.setRedirect(false);	
 		
-		return forward;		
-		
+		return forward;
 	}
 
-	
 }

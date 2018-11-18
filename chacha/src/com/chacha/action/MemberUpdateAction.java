@@ -12,6 +12,7 @@ public class MemberUpdateAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(); // session값 취득
 	String url = "member_update.jsp";
 	
 	
@@ -19,7 +20,6 @@ public class MemberUpdateAction implements Action{
 	// : 로그인이 되 있어야 한다!!!
 	// session이 null이 아니면
 	
-	HttpSession session = request.getSession(); // session값 취득
 	if(session.getAttribute("loginUser") == null) { // 로그인 no
 		url = "index.bizpoll";
 	}else { //로그인 ok

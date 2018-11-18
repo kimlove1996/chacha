@@ -63,6 +63,7 @@
 		DELETE FROM member
 		WHERE id = #{userid}
 	</delete>
+	
 <!-- 로그인 확인 체크 -->
 	<select id="loginCheck" parameterType="com.chacha.dto.MemberDTO" resultType="com.chacha.dto.MemberDTO">
 		SELECT * FROM member

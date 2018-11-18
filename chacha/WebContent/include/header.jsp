@@ -31,6 +31,9 @@
 	padding: 0;
 }
 
+input {
+	outline-color: pink;
+}
 
 #header_wrap {
      box-sizing: border-box;
