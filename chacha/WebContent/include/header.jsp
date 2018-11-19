@@ -1110,6 +1110,8 @@ input#serch_keyword{
                              
                              
                              <li><a id="header_chacha1_mypage" href="<%=path%>/#">마이페이지▼</a>
+                             <c:choose>
+                             	<c:when test="${!empty sessionScope.loginUser}">
                                   <div id="header_chacha1_dropdown">
                                       <a href="<%=path%>/#">주문/배송조회</a> 
                                       <a href="<%=path%>/#">장바구니</a> 
@@ -1117,7 +1119,10 @@ input#serch_keyword{
                                       <a href="<%=path%>/memberUpdate.bizpoll">회원정보수정</a>
                                       <a href="<%=path%>/memberpwupdateplay.bizpoll">비밀번호수정</a>
                                       <a href="<%=path%>/memberdelete.bizpoll">회원탈퇴</a>
-                                  </div></li>
+                                  </div>
+                                 </c:when>
+                              </c:choose>   
+                             </li>
                              <li><a href="<%=path%>/#">고객센터</a></li>
                         </ul>
                    </div>

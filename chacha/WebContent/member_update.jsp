@@ -66,15 +66,15 @@ ul {
      color: lightslategray;
 }
 .insert_info {
-     width: 359px;
-     height: 63px;
-     margin-top: 20px;
-     position: relative;
-     top: 73px;
-     margin: 0 auto;
-     border: none;
-     border-color: #dbc4f3;
-     border-bottom-style: solid;
+width: 359px;
+    height: 63px;
+    margin-top: 20px;
+    position: relative;
+    top: 73px;
+    margin: 0 auto;
+    border: none;
+    border-color: #dbc4f3;
+    border-bottom-style: solid;
 }
 .insert_label {
      position: absolute;
@@ -87,16 +87,19 @@ ul {
      font-size: 15px;
 }
 .set {
-     width: 99%;
-     height: 24px;
-     display: block;
-     position: relative;
-     border: none;
-     margin-top: 4px;
-     border-radius: 2px;
-     top: 36px;
-     z-index: 2;
-     padding-left: 5px;
+    width: 99%;
+    height: 24px;
+    display: block;
+    position: relative;
+    border: none;
+    margin-top: 4px;
+    border-radius: 2px;
+    top: 36px;
+    z-index: 2;
+    padding-left: 5px;
+    font-size: 15px;
+    background-color: rgb(251, 243, 248);
+
 }
 /* .input_background {
      width: 100%;
@@ -165,16 +168,17 @@ ul {
      color: dimgray;
 }
 .email_idurl {
-     width: 109.5px;
-     margin-left: 2px;
-     border: none;
-     z-index: 2;
-     padding: 2px 0 0 0;
-     height: 18px;
+    width: 109.5px;
+    margin-left: 2px;
+    border: none;
+    z-index: 2;
+    padding: 2px 0 0 0;
+    height: 18px;
 }
 #addr_box2{
-     display: none;
-     padding-top: 34px
+     padding-top: 34px;
+     display: block;
+     
      
 }
 #postcode {
@@ -198,8 +202,12 @@ ul {
      border: 1px solid #e6ced2
 }
 #addr{
-     width: 347px;
-    height: 35px;
+	top: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    color: black;
+    width: 45px;
+    height: 10px;
 }
 #email{
      width: 347px;
@@ -222,6 +230,64 @@ ul {
 #error_email{
 	top:64px;
 }
+
+#id{
+	top: 20px;
+	font-size:10px;
+	font-weight:bold;
+	color: black;
+}
+
+#name{
+	top : 20px;
+	font-size: 10px;
+	font-weight: bold;
+	color: black;
+}
+
+#ph{
+	top : 20px;
+	font-size: 10px;
+	font-weight: bold;
+	color: black;
+}
+
+
+#email{
+	top: 20px;
+	font-size: 10px;
+	font-weight: bold;
+	color: black;
+}
+
+#input_email{
+	display: block;
+}
+
+#insert_email{
+	border: none;
+}
+
+.email_idurl{
+	border:1px solid #efecee;
+	font-size : 12px;
+}
+
+#email{
+	width:55px;
+	height:10px;
+}
+
+
+#addr_box1{
+	border-bottom: none;
+}
+
+#insert_email{
+	margin-top: 16px;
+}
+
+
 
 
 </style>
@@ -247,66 +313,14 @@ ul {
     	 
     	 
     	 
-    	                    $("#input_id").focus(
-                             function() {
-                                  $(this).css("font-size", "15px");
-                                  $("article #id").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#input_id").css("background-color", "#fbf3f8");
-                                  $("#back_id").css("display", "block");
-                             });
                   
                   
-                   $("#input_name").focus(
-                                      function() {
-                                           $(this).css("font-size", "15px");
-                                           $("article #name").css("top", "20px").css("font-size", "10px").css("font-weight", "bold").css("color","black");
-                                           $("#input_name").css("background-color","#fbf3f8");
-                                           $("#back_name").css("display", "block");
-                                      });
-                   $("#input_ph").focus(
-                             function() {
-                                  $(this).css("font-size", "15px");
-                                  $("article #ph").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#input_ph").css("background-color", "#fbf3f8");
-                                  $("#back_ph").css("display", "block");
-                             });
                    
                    
-                   $("#addr").click(function() {
-                                  $("article #addr").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#addr_box1").css("height", "83px");
-                                  $("#addr_box1").css("border", "none");
-                                  $("#addr_box2").css("display", "block");
-                                  $("#addr_box2").css("display", "block");
-                                  $("#addr").css("width", "45px");
-                                  $("#addr").css("height", "10px");
-                                  /* $(".addr_b").css("border-bottom", "2px solid rgb(226, 215, 236)"); */
-                                  
-                             });
                    
-                   $("#email").click(
-                             function() {
-                                  $("article #email").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#input_email").css("display","block")
-                                  $("#insert_email").css("border", "none");
-                                  $(".email_idurl").css("border", "1px solid #efecee");
-                                  $(".email_idurl").css("font-size", "12px");
-                                  $("#email").css("width", "55px");
-                                  $("#email").css("height", "10px");
-                             });
                              
                              
                    
-                   
-                   $("#selmail").change(function() {
-                        var selmail = $("#selmail").val();
-                        if (selmail == "directVal") {
-                             $("#email_url").val("");
-                             $("#email_url").focus("");
-                        } else {
-                             $("#email_url").val(selmail);
-                        }
-                   });
                    
                    
                    

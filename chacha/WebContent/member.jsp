@@ -138,8 +138,8 @@ ul {
      color: white;
 }
 #insert_box {
-     margin: 0;
-     padding: 0;
+    position: relative;
+    bottom: 40px;
     
 }
 #selmail {
@@ -214,7 +214,66 @@ ul {
 </style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+
+
      $(document).ready(function() {
+    	 
+    	 $("#input_id").blur(function(){
+   		  /* alert("test") */
+   		 var idVal = $(this).val();
+   		 var mid = $("#input_id");
+  	     /* trim: 앞뒤 공백 제거 */
+  	     var id = $.trim(mid.val());
+   		 /* ID 유효성 검사 */
+  	     var regId = /^[a-zA-Z0-9]{4,12}$/; /* 4~12자까지 영대소문자와 숫자만 입력가능. */
+    	     
+  	     
+  	   if(id == ""){
+ 	    	 mid.focus();
+ 	    	 mid.next().css("display","block");
+ 	    	 mid.parent().css("margin-bottom","12px");
+ 	    	 return false;
+ 	     }else if(!regId.test(id)){
+ 	    	 mid.focus();
+ 		 	 mid.next().text("4~12까지의 영문자와 숫자만 입력하세요.").css("display","block");
+ 	    	 mid.parent().css("margin-bottom","12px");
+ 	    	 return false;
+ 		 	 
+ 	     }/* + ID 중복체크 */ 
+ 	     else if(id !=""){
+	   			  $.ajax({
+	   				  /* ajax db갔다
+	   				  	   view -> Controller -> Model -> DB */
+	   				  	   url : "idCheck.bizpoll",
+	   				  	   type: "POST",
+	   				  	   dataType: "json",
+	   				  	   data: "id=" + idVal,
+	   				  	   success: function(data){
+	   				  		   if(data.message == "-1"){
+	   				  			 $("#input_id").next().text("이미 사용중인 ID입니다.").css("display","block").css("color","#F46665");
+			   		                 $("#input_id").select;
+	   				  		   }else{
+	   				  			 $("#input_id").next().text("사용가능한 ID입니다.").css("display","block").css("color","#0000FF");
+	   				  			 $("#input_pw").select;
+	   				  		   }
+	   				  	   },
+	   				  	   error:function(){
+	   				  		   alert("System Error!!!");
+	   				  	   }
+	   			  })
+	   		  }
+   		  
+   	  });
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
                    $("#input_id").focus(
                              function() {
                                   $(this).css("font-size", "15px");
@@ -308,33 +367,7 @@ ul {
                 	  
                 	  
                 	  
-                	  $("#input_id").blur(function(){
-                		  /* alert("test") */
-                		  var idVal = $(this).val();
-                		  
-                		  if(id !=""){
-                			  $.ajax({
-                				  /* ajax db갔다
-                				  	   view -> Controller -> Model -> DB */
-                				  	   url : "idCheck.bizpoll",
-                				  	   type: "POST",
-                				  	   dataType: "json",
-                				  	   data: "id=" + idVal,
-                				  	   success: function(data){
-                				  		   if(data.message == "-1"){
-                				  			 $("#input_id").next().text("이미 사용중인 ID입니다.").css("display","block").css("color","#F46665");
-            		   		                 $("#input_id").select;
-                				  		   }else{
-                				  			 $("#input_id").next().text("사용가능한 ID입니다.").css("display","block").css("color","#0000FF");
-                				  			 $("#input_pw").select;
-                				  		   }
-                				  	   },
-                				  	   error:function(){
-                				  		   alert("System Error!!!");
-                				  	   }
-                			  })
-                		  }
-                	  });
+                	  
                 	  
                 	  
                    });  
@@ -429,7 +462,6 @@ ul {
      $(document).on("click","#yes",function(){
     	 /* 유효성체크하는 값을 받아온다. */
 	    	 var form = $("#frm_mem"),
-	    	 mid = $("#input_id"),
 	    	 mpw = $("#input_pw"),
 	    	 mpw2 = $("#input_pw_c"),
 	    	 mname = $("#input_name"),
@@ -448,23 +480,7 @@ ul {
      
      
      
-     /* ID 유효성 검사 */
-     /* trim: 앞뒤 공백 제거 */
-     var id = $.trim(mid.val());
-     var regId = /^[a-zA-Z0-9]{4,12}$/; /* 4~12자까지 영대소문자와 숫자만 입력가능. */
-     
-     if(id == ""){
-    	 mid.focus();
-    	 mid.next().css("display","block");
-    	 mid.parent().css("margin-bottom","12px");
-    	 return false;
-     }else if(!regId.test(id)){
-    	 mid.focus();
-	 	 mid.next().text("4~12까지의 영문자와 숫자만 입력하세요.").css("display","block");
-    	 mid.parent().css("margin-bottom","12px");
-    	 return false;
-	 	 
-     }/* + ID 중복체크 */   
+      
      
      
      
@@ -488,7 +504,7 @@ ul {
 		 return false;
      }else if(!regPass.test(pw)){
     	 mpw.select();
-    	 mpw.next().text("9~20자 이내 영문자, 숫자, 특수문자만 이용하세요.").css("display","block");
+    	 mpw.next().text("9~20자 이내 영문자, 숫자, 특수문자를 혼합하여 이용하세요.").css("display","block");
     	 mpw.parent().css("margin-bottom","12px");
     	 return false;
      }else if(pw2 == ""){
@@ -588,6 +604,10 @@ ul {
      }else if(addr2 == ""){
     	 maddr2.focus();
     	 $("#address2").next().text("상세주소를 입력해주십시오.").css("display","block");
+    	 $("#address2").parent().css("margin-bottom","12px");
+    	 return false;
+     }else{
+    	 $("#address2").next().css("display","none");
     	 $("#address2").parent().css("margin-bottom","12px");
     	 return false;
      }

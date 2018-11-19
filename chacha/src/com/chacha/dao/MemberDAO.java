@@ -146,7 +146,7 @@ public class MemberDAO {
 			try {
 				result = sqlSession.update("updateMember", mDto);
 				
-				
+				sqlSession.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally {
@@ -169,7 +169,7 @@ public class MemberDAO {
 			mDto.setPw(userPw);
 			
 			try {
-				result = sqlSession.selectOne("updatePw", mDto);
+				result = sqlSession.update("updatePw", mDto);
 				sqlSession.commit();
 				
 			} catch (Exception e) {

@@ -47,7 +47,7 @@ public class BoardDAO {
 		sqlSession = sqlSessionFactory.openSession();
 		int result = 0;
 		try {
-			result = sqlSession.selectOne("countPaging",criDto);
+			result = sqlSession.selectOne("countPaging",criDto); // => result에는 게시글 개수(bno)가 들어가있다.
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

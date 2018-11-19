@@ -31,18 +31,28 @@ public class BoardListAction implements Action{
 		
 		// keyword와 tyep으로 검색된 게시글 리스트가 출력.
 		CriteriaDTO criDto = new CriteriaDTO();
-		int page = 1;
+		int page = 1; //시작은 1페이지.
 		
 		// 페이지 값이 비지 않았을 경우 request로 받은 page 넘버를 page에 입력합니다.
-		if(request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
+		if(request.getParameter("page") != null) { //페이지를 요청 시 널값이 아닌 경우
+			page = Integer.parseInt(request.getParameter("page")); //페이지값을 받아옵니다.(즉 2페이지부터)
 		}
 		System.out.println("페이지 번호 : " + page);
 		//현 page 번호를 criDto.setPage로 보내 값을 저장시킵니다.
-		criDto.setPage(page);
+		criDto.setPage(page); // page => 최소 2page
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//코드에는 new라는 값을 담아놨습니다.
-		String code = "new";
+		String code = "new"; // 기본이 1페이지 인것처럼 new가 처음 key임.
 		
 		//key를 받아왔을 떄 값이 비어있지 않다면,
 		if(request.getParameter("key") != null) {
@@ -74,11 +84,15 @@ public class BoardListAction implements Action{
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
 		BoardDAO bDao = BoardDAO.getInstance(); // boardDAO 호출. -> bDao에 값 담음.
-		
-		
-		
-		
 		
 		// 게시글 목록(정보들) 출력
 		List<BoardDTO> boardList = bDao.boardListAll(criDto); // 담은 값 DTO에 한줄씩 list로 담음.
@@ -91,11 +105,28 @@ public class BoardListAction implements Action{
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//페이지 네이션 생성하는 곳
 		PageMakerDTO pageMaker = new PageMakerDTO();
 		pageMaker.setCriDto(criDto);
 		
-		int totalCount = bDao.totalCount(criDto);
-		pageMaker.setTotalCount(totalCount);
+		int totalCount = bDao.totalCount(criDto); // 게시물의 개수
+		pageMaker.setTotalCount(totalCount); // 게시물의 개수를 페이지메이커의 setTotalCount에 넣었음.
 		request.setAttribute("pageMaker", pageMaker);
 		
 		

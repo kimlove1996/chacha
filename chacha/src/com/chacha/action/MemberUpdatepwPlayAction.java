@@ -18,7 +18,7 @@ public class MemberUpdatepwPlayAction implements Action{
 		String url = "member_pw_update.jsp";
 		
 		String id = request.getParameter("updateId");
-		String pw = request.getParameter("input_pw_now");
+		String pw = request.getParameter("input_pw");
 		System.out.println("변경할 id:" + id);
 		System.out.println("변경할 pw:" + pw);
 		

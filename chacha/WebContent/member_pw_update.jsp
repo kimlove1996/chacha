@@ -459,7 +459,7 @@ ul {
     
                              <div class="insert_info">
                                   <label for="input_pw_now" class="insert_label" id="id"> 기존 비밀번호 입력 </label>
-                                  <input type="text" id="input_pw_now" class="set pop" name="input_pw_now">
+                                  <input type="password" id="input_pw_now" class="set pop" name="input_pw_now">
                               	  <span class="error" id="error_id">필수입력입니다.</span>
                              </div>
                              

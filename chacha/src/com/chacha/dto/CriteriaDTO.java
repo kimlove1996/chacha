@@ -33,7 +33,7 @@ public class CriteriaDTO {
 	public int getPage() {
 		return page;
 	}
-
+	
 	public void setPage(int page) {
 		
 		//page가 0보다 작거나 같으면 1page로 적용합니다.
@@ -45,10 +45,14 @@ public class CriteriaDTO {
 		this.page = page;
 	}
 
+	
+	
+	
+	
 	//method for MyBatis SQL Mapper: 조회 시작 row 취득하는 메서드
 	public int getPageStart() {
 		return (((this.page-1) * perPageNum) + 1);
-	}
+	} //(2-1) * 10) + 1
 	
 	
 	
@@ -56,7 +60,7 @@ public class CriteriaDTO {
 	public int getPerPageNum() {
 		return this.page * perPageNum;
 		//2페이지 x 10 = 20번 게시글까지 출력.
-	}
+	}// 작업 끝! 빠꾸
 
 	public void setPerPageNum(int perPageNum) {
 		this.perPageNum = perPageNum;

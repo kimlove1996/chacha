@@ -166,7 +166,7 @@
 		
 	}
 	.span_only{
-		color: #0d9900;
+		color:#fa5850;;
 		font-size: 12px;
 		font-weight: 400px;
 	}
@@ -317,7 +317,11 @@
 		/* 전체체크 버튼 클릭 돼있으면 ckAll true */
 		/* 전체체크 버튼 클릭 안돼있으면 ckAll false */
 		/* alert("상태: "+ ckAll); */
+		//prop = check 하는 과정의 기능을 다루고 있음.
 		
+		
+		
+		/* 상단 체크박스가 체크되면 모두 체크됩니다 */
 		if(ckAll == true){
 			$(".ckboxs").prop("checked", true)
 		}else{
