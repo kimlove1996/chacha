@@ -241,11 +241,12 @@ $(document).ready(function(){
 		}
 		
 	});
-			alert(filename + maxSize);
 	
 	
 //fafa 닫기 아이콘을 눌렀을 때.
 	$(document).on("click","#file_close_btn",function(){
+		alert("test");
+		
 		$("#uploadfile").replaceWith($("#uploadfile").clone(true));//clone(trne)초기화
 		$("#uploadfile").val("");
 		$("#file-name").text("선택된 파일없음");

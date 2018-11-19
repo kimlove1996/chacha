@@ -80,16 +80,17 @@ public class BoardUpdatePlayAction implements Action{
 					//파일 지우지 않는다. filename과 filesize도 수정하면 안됨.
 					flag = 1;
 				}else {
-					File file = new File(Constants.UPLOAD_PATH + filename);
+					System.out.println("파일 삭제");
+					File file = new File(Constants.UPLOAD_PATH + pfilename);
 					file.delete();
 				}
+					System.out.println("깃발" + flag);
 				
 				try {
 					Enumeration files = multi.getFileNames(); // 파일을 다중으로 보낼 수도 있기 떄문에 files(배열)로 넣어준다.
 					
 					while(files.hasMoreElements()) { // files(배열)에서 요소가 있으면 true로 읽겠다.
 						String file1 = (String)files.nextElement(); // nextElement = 있는지 확인하는 element
-						System.out.println("file1:" + file1);
 						filename = multi.getFilesystemName(file1);//첨부파일의 파일이름을 가져온다. 
 									//getFilesystemName = 파일을 가지고 오돼 (중복정책이 부여된 기능의 이름을 가져옴.)
 									//getOriginalFileName = 일반 오리지널 파일의 명

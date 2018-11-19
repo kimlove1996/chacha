@@ -133,16 +133,16 @@
 			                <![CDATA[AND writer LIKE '%'||#{keyword}||'%']]> <!-- 작성자 -->
 			                </if>
 			                
-			                <if test='"code" == "new"'>
+			                <if test='code == "new"'>
 			                	ORDER BY bno DESC
 			                </if>
-			                <if test='"code" == "good"'>
+			                <if test='code == "good"'>
 			                	ORDER BY goodcnt DESC, bno DESC
 			                </if>
-			                <if test='"code" == "reply"'>
+			                <if test='code == "reply"'>
 			                	ORDER BY replycnt DESC, bno DESC
 			                </if>
-			                <if test='"code" == "cnt"'>
+			                <if test='code == "cnt"'>
 			                	ORDER BY viewcnt DESC, bno DESC
 			                </if>
 		<![CDATA[	         
