@@ -23,7 +23,7 @@
 
 <!-- ======================================================================== -->
 		<!-- MemberDAO -->
-	<insert id="insertmember" parameterType="com.chacha.dto.MemberDTO"><!-- parameterType : 타입 경로 지정해주는 것. -->
+	<insert id="insertMember" parameterType="com.chacha.dto.MemberDTO"><!-- parameterType : 타입 경로 지정해주는 것. -->
 	INSERT INTO member(id,pw,name,phone,zipcode,addr1,addr2,email)
 	VALUES(#{id},#{pw},#{name},#{phone},#{zipcode},#{addr1},#{addr2},#{email})
 	<!-- 바인딩 변수는 매칭하는 기능을 상실해 사용할 수 없으므로, 	DTO변수 명으로 부여. -->

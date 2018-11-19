@@ -337,6 +337,15 @@
 	
 	
 	
+	/* 최신순 추천순 등 조건 박스 */
+	.order_keyword{
+		border: 1px solid gray;
+	}
+	
+	
+	
+	
+	
 .pagination a:hover:not(.active) {background-color: #ddd;}
 </style>
 <script type="text/javascript">
@@ -349,7 +358,7 @@
 		
 		
 		
-		var code = $("#code").val();
+		/* var code = $("#code").val();
 		if(code == "new"){
 			$("#orderNew").css("color","#E71D36").css("font-weight","bold").css("text-decoraton","none");
 		}
@@ -361,7 +370,7 @@
 		}
 		if(code == "cnt"){
 			$("#orderCnt").css("color","#E71D36").css("font-weight","bold").css("text-decoraton","none");
-		}
+		} */
 		
 		
 		
@@ -425,29 +434,33 @@
       		}
       		
       		});
-      	
-      	
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
-      	  
         });
 		
 		
 		
 		
-		
+        
+        /* 조회순, 추천순 등의 셀렉트 박스 선택 시 */
+    	$(document).on("change","#qna_selecting_select", function(){
+	    	var flag = $("#qna_selecting_select").val();
+			var keyword = $("#insert_input").val();
+    		var sel = $("#qna_selecting_select").val();
+    		
+    		
+    		if(sel == 1){
+    			location.href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=new";
+    		}else if(sel == 2){
+    			location.href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=good";
+    		}else if(sel == 3){
+    			location.href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=reply";
+    		}else if(sel == 4){
+    			location.href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=cnt";
+    		}
+    		
+    	});
+        
+        
+        
 		
 		
 		
@@ -461,29 +474,33 @@
 </head>
 <body id="product_qna">
 	<div id="qna_all">
-	<form action="boardWriter.bizpoll" method="post"enctype="multipart/form-data">
+	<form action="boardWriter.bizpoll" method="post" enctype="multipart/form-data">
 			<div id="qnatitle">
 				<h1>고객문의게시판</h1>
 				<p>상품 Q&A입니다.</p>
 			</div>
 			
 			<div id="qna_selecting">
-				<select>
-					<option>
-							전체글보기
+				<select id="qna_selecting_select" selected="selected" name="key">
+					<option value="1" id="qna_selecting01">
+							최신순
 					</option>
-					<option>
-							답변 전 글보기
+					<option value="2" id="qna_selecting02">
+							추천순
+					</option >
+					<option value="3" id="qna_selecting03">
+							댓글순
 					</option>
-					<option>
-							답변완료 글보기
+					<option value="4" id="qna_selecting04">
+							조회순
 					</option>
+					
 				</select>
 				
-				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=new" id="orderNew">최신순</a>
-				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=good" id="orderGood">추천순</a>
-				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=reply" id="orderReply">댓글순</a>
-				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=cnt" id="orderCnt">조회순</a>
+				<%-- <a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=new" id="orderNew" class="order_keyword">최신순</a>
+				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=good" id="orderGood" class="order_keyword">추천순</a>
+				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=reply" id="orderReply" class="order_keyword">댓글순</a>
+				<a href="boardList.bizpoll?flag=${flag}&keyword=${keyword}&key=cnt" id="orderCnt" class="order_keyword">조회순</a> --%>
 				
 				
 				

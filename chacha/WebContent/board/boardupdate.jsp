@@ -338,7 +338,6 @@ $(document).ready(function(){
 								<input type="button" name="btn btn-file" id="btn-file" value="파일선택" >
 								<span class="file" id="file-name" style="height: 29px; border: none;">${boardview.filename}</span>
 								<i class="fa fa-close" id="file_close_btn" style="display: none;"></i>
-								
 								<input type="hidden" id="now-file-name" name="now-file-name">
 								<input type="hidden" id="now-file-size" name="now-file-size">
 							</div>

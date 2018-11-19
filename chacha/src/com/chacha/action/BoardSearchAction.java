@@ -18,6 +18,18 @@ public class BoardSearchAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		
+		
+		// BoardListAction으로 복붙해서 쓸모 없음.
+		
+		
+		
+		
+		
+		
+		
+		
 		String url = "board/boardlist.jsp";
 		
 		
@@ -29,7 +41,7 @@ public class BoardSearchAction implements Action{
 		
 		
 		
-		// keyword와 tyep으로 검색된 게시글 리스트가 출력.
+		// keyword와 type으로 검색된 게시글 리스트가 출력.
 		CriteriaDTO criDto = new CriteriaDTO();
 		int page = 1;
 		if(request.getParameter("page") != null) {
