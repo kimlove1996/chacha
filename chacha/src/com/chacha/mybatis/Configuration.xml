@@ -16,15 +16,16 @@
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC"/>
-			<dataSource type="POOLED"><!-- 기존것으로 하려면 UNPOOLED ,  -->
+			<!-- 기존것으로 하려면 UNPOOLED ,  -->
+			<dataSource type="POOLED">
 				<property name="driver" value="${driver}"/>
 				<property name="url" value="${url}"/>
 				<property name="username" value="${username}"/>
 				<property name="password" value="${password}"/>
-				<property name="poolMaximumActiveConnections" value="20"/><!-- 활성화된 최대 커넥션 수(20개. 이상은 불가.) -->
-				<property name="poolMaximumIdleConnections" value="20"/><!-- 유휴상태에서 최대 커넥션 수 -->
-				<property name="poolMaximumCheckoutTime" value="20000"/><!-- 최대 커넥션 획득 시간=20000=20초 -->
-				<property name="poolTimeToWait" value="15000"/><!-- pool이 비정상적으로 긴 경우 커넥션을 다시 얻으려고 시도하는 셋팅. 15000=15초-->
+				<property name="poolMaximumActiveConnections" value="20"/>
+				<property name="poolMaximumIdleConnections" value="20"/>
+				<property name="poolMaximumCheckoutTime" value="20000"/>
+				<property name="poolTimeToWait" value="15000"/>
 			</dataSource>
 		</environment>
 	</environments>

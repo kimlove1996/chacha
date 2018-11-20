@@ -88,19 +88,19 @@ public class MemberDAO {
 		
 		//비밀번호 수정 페이지 현재 비밀번호와 일치하는지 확인.
 		public String confirmPW(String userid, String userpw) {
-			String result = null;
 			sqlSession = sqlSessionFactory.openSession();
+			String result = null;
 			MemberDTO mDto = new MemberDTO();
 			mDto.setId(userid);
 			mDto.setPw(userpw);
 			try {
 				result = sqlSession.selectOne("confirmPW",mDto);
-				System.out.println("비밀번호 중복 유무 : " + result);
 				if(result != null) {
 					result = "-1";
 				}else {
 					result = "1";
 				}
+				System.out.println("비밀번호 중복 유무 : " + result);
 				
 			} catch (Exception e) {
 				e.printStackTrace();

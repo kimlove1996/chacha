@@ -584,16 +584,8 @@
 					<tbody>
 					
 					
-					
-					<!--  EL태그로 받는 조건
-					        1 . 변수타입
-					        	${변수명}
-					        2 . DTO 타입
-					        	${DTO.변수}
-					        3 . List타입
-					        foeach 반복문을 돌며 1줄씩 옮겨 담는 것임. -->
-					<c:forEach items="${boardList}" var="bDto"> <!-- var =  "bDto"에는 첫번쨰 반복열의 값을 넣고 이런식으로 계속 값의 반복을 돌며 담는 것임. -->
-						<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="today2"/> <!-- 오늘날짜와 시간을 regdate2와 today2에 담음. -->
+					<c:forEach items="${boardList}" var="bDto"> 
+						<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="today2"/> 
 						<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate2"/>
 					<tr>	
 						<!-- 게시번호 -->
@@ -699,23 +691,21 @@
 				
 				<!-- 페이지넘기기 -->
 			<div class="pagenation">
-				<c:if test="${pageMaker.prev}"> <!--  =>prev가 false라면 화살표가 생기지 않는다. -->    
+				<c:if test="${pageMaker.prev}">  
 						<a href="boardList.bizpoll?page=${pageMaker.startPage - 1}">&laquo;</a>
-				</c:if>																<!-- 왼쪽 페이지네이션 화살표 -->
+				</c:if>																
 			
-				<c:forEach begin="${pageMaker.startPage}"  <%-- 1부터 --%>
-				end="${pageMaker.endPage}" var="idx"><!-- 10까지 반복해서 도는데, idx라는 값(var)에 이것을 넣는다. -->
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 					
 					
-						<!-- 1부터 10까지 만들어지며  현 페이지네이션의 색상을 표출해주는 곳 또는 -->
 						<a href="boardList.bizpoll?page=${idx}&flag=${flag}&keyword=${keyword}&key=${code}" 
 						<c:out value="${pageMaker.criDto.page == idx? 'class=active':''}"/>>${idx}</a> 
 					
 				</c:forEach>
 				
-				<c:if test="${pageMaker.next}"> <!-- ...만드는 구간.-->
+				<c:if test="${pageMaker.next}">
 						<a href="boardList.bizpoll?page=${pageMaker.endPage + 1}">&raquo;</a>
-				</c:if>															<!-- 오른쪽 페이지네이션 화살표 -->
+				</c:if>															
 			</div>
 				
 				
