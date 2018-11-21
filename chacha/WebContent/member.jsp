@@ -575,10 +575,6 @@ ul {
      2 . 정규식 check */
      
      
-     
-     
-     
-     
      var zipcodeVal = $.trim(zipcode.val());
      var addr1 = $.trim(maddr1.val());
      var addr2 = $.trim(maddr2.val());
