@@ -4,91 +4,42 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
-	body{
-		margin: 0;
-		padding: 0;
-	}
-	#bile{
-		
-	}
-	
-	#bil1{
-	    width: 111px;
-	    height: 100%;
-	    display: inline-block;
-	    border: 1px solid black;
-	    background-color: black;
-	    position: absolute;
-	    left: 0;
-	}
-	#bil2{
-	    width: 111px;
-	    height: 100%;
-	    display: inline-block;
-	    border: 1px solid black;
-	    background-color: black;
-	    position: absolute;
-	    right: 0;
-	}
-	#bil1 > div > div{
-	    background-color: white;
-	    width: 78px;
-	    height: 66px;
-	    position: relative;
-	    left: 14px;
-	    top: 18px;
-	    display: inline-block;
-	    margin-bottom: 35px;
-	}
-	
-	
+      #div1{height:125px; overflow:hidden; transition:.3s;} 
 </style>
+<script type="text/javascript">
+function show(){ 
+    $("#div1").css("height",$("table")[10]); 
+} 
+function hide(){ 
+    $("#div1").css("height","125px"); 
+} 
+</script>
 </head>
 <body>
-<div id="bile">
-
-
-	<!-- 왼쪽 필름 -->
-	<div id="bil1">
-		<div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>	
-	</div>
-</div>	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div id="bil2">
-	</div>
-<div>	
+ <div id="div1"> 
+      <table> 
+          <tr><td>list01</td></tr> 
+          <tr><td>list02</td></tr> 
+          <tr><td>list03</td></tr> 
+          <tr><td>list04</td></tr> 
+          <tr><td>list05</td></tr> 
+          <tr><td>list06</td></tr> 
+          <tr><td>list07</td></tr> 
+          <tr><td>list07</td></tr> 
+          <tr><td>list07</td></tr> 
+          <tr><td>list07</td></tr> 
+          <tr><td>list07</td></tr> 
+          <tr><td>list07</td></tr> 
+          <tr><td>list07</td></tr> 
+          <tr><td>list07</td></tr> 
+          <tr><td>list07</td></tr> 
+          <tr><td>list07</td></tr> 
+      </table> 
+  </div> 
+  <input type="button" onclick="show()" value="더보기"> 
+  <input type="button" onclick="hide()" value="닫기"> 
 </body>
 </html>
