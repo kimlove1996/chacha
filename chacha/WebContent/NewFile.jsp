@@ -7,15 +7,22 @@
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
+	  table{height: 125px;  overflow:hidden;}
       #div1{height:125px; overflow:hidden; transition:.3s;} 
 </style>
 <script type="text/javascript">
-function show(){ 
-    $("#div1").css("height",$("table")[10]); 
+/* function show(){ 
+
+	alert($("#div1").Height);
+	$("#div1").css("height",($("#div1").clientHeight+125)+"px"); 
+
 } 
 function hide(){ 
     $("#div1").css("height","125px"); 
-} 
+}  */
+$(document).click("input[type='button']",function(){
+	alert($(this).val());
+});
 </script>
 </head>
 <body>

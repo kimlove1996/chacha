@@ -345,20 +345,19 @@
 			}
 		});
 		
-		
-		
-		
-		
-		
-		
-		
-		/* 과제~~! 하단의 체크박스가 4개 다 true면 cbox도 true
-		체크박스가 1개라도 false면 cbox도 false
-		
-		:checked 4개
-		length */
-		
-		
+		/* 선택버튼 전부 다 클릭시 전체버튼 클릭 */
+		$(document).on("click",".ckboxs", function(){
+			var ck1 = $("#li1box").is(":checked");
+			var ck2 = $("#li2box").is(":checked");
+			var ck3 = $("#li3box").is(":checked");
+			var ck4 = $("#li4box").is(":checked");
+			
+			if(ck1 == true && ck2 == true && ck3 == true && ck4 == true){
+				$("#cbox").prop("checked", true);
+			}else{
+				$("#cbox").prop("checked", false);
+			}
+		});
 		
 		
 	});
