@@ -267,13 +267,6 @@ ul {
     	 
     	 
     	 
-    	 
-    	 
-    	 
-    	 
-    	 
-    	 
-    	 
                    $("#input_id").focus(
                              function() {
                                   $(this).css("font-size", "15px");
