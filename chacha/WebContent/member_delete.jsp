@@ -283,7 +283,7 @@ $(document).ready(function(){
 
 
 $(document).on("click","#no_btn",function(){
-	$("#modal_all").css("display","none");
+	$("#delete_modal_all").css("display","none");
 });
 
 $(document).on("click","#yes_btn",function(){

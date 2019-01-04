@@ -1109,7 +1109,7 @@ input#serch_keyword{
                              </c:choose>
                              
                              
-                             <li><a id="header_chacha1_mypage" href="<%=path%>/#">마이페이지▼</a>
+                             <li><a id="header_chacha1_mypage" href="#">마이페이지▼</a>
                              <c:choose>
                              	<c:when test="${!empty sessionScope.loginUser}">
                                   <div id="header_chacha1_dropdown">

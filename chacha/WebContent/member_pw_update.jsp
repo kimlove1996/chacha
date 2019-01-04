@@ -228,142 +228,70 @@ ul {
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
      $(document).ready(function() {
-    	 var email_info = "${sessionScope.loginUser.email}";
-    	 var index = email_info.indexOf('@');
-    	 var emailid = email_info.substring(0, index);
-    	 var emailurl = email_info.substring(index + 1);
-    	 alert(email_info +", "+ index +", "+emailid +", "+emailurl ); 
-    	 
-    	 $("#email_id").val(emailid); /* input의 id값을 넣었음. */
-    	 $("#email_url").val(emailurl);
-    	 
-    	 
-    	 
-    	 
-    	 
-    	 
-    	 
-    	 
-    	 
-    	 
-    	 
-    	           $("#input_pw_now").focus( function() {
-                                  $(this).css("font-size", "15px");
-                                  $("article #id").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#input_pw_now").css("background-color", "#fbf3f8");
-                                  $("#back_id").css("display", "block");
-                             });
-                   $("#input_pw").focus(function() {
-                                  $(this).css("font-size", "15px");
-                                  $("article #pw").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#input_pw").css("background-color", "#fbf3f8");
-                                  $("#back_pw").css("display", "block");
-                             });
-                   $("#input_pw_c").focus(function() {
-                                           $(this).css("font-size", "15px");
-                                           $("article #pw_c").css("top", "20px").css("font-size", "10px").css("font-weight", "bold").css("color","black");
-                                           $("#input_pw_c").css("background-color","#fbf3f8");
-                                           $("#back_pw_c").css("display", "block");
-                                      });
-                 
-                   
-                   
-                   
-                   $(".pop").blur(function(){
-                	   var inputval = $(this).val();
-                	   
-                	  if(inputval == ""){
-                		  $(this).next().css("display","block");
-	                  	/*  $(".error").css("display","block"); */
-	                 	  $(this).parent().css("margin-bottom","12px");
-	                  }else{
-	                  	  /* $(".error").css("display","none"); */
-                		  $(this).next().css("display","none");
-                		  $(this).parent().css("margin-bottom","5px");
-                	  }
-                	  
-                	  /* 비밀번호와 비밀번호 확인값이 다르면 경고메세지 출력 */
-                	  
-                	  
-                	  
-                   });  
-                   
-                   
-                   /* 비밀번호 재확인 input태그를 blur했을 때????????????????
-                   	  비밀번호와 비밀번호 재확인 값을 비교*/
-                   $("#input_pw_c").blur(function(){
-	                      var pw1 =$("#input_pw").val();
-	                      var pw2 =$("#input_pw_c").val();
-	                      /* 선행조건 : 둘다 값이 존재할 때만 적용가능. */
-	   	              	  if(pw2 !=""){ /* 비밀번호와 비밀번호 확인값이 다를 때 동작 */
-	   	            	   /* 	alert("=====>"); */
-	   	            	   	if(pw1 == pw2){
-	   	            	   		$(".checkpw").next().css("display","none");
-	   	            	   	}else{
-	   	            	   	 /*  1 . 비밀번호 확인 메시지에 "비밀번호가 일치하지 않습니다."출력
-		   		                 2 . 비밀번호확인(input) -> focus가가고
-		   		                 3 . 값을 초기화. */
-		   		                 $(this).next().text("비밀번호가 일치하지 않습니다.").css("display","block");
-		   		                 $(this).select;
-		   		                 
-	   	            	   	}
-	   	              	  }
-                	   
-                   });
-                   
-                   
-          
-                  
-                    
-	                
-                   
-                   
-             });
-     
-     
-     
-     
-     
-     
-     function sample6_execDaumPostcode() {
-          new daum.Postcode(
-                   {
-                        oncomplete : function(data) {
-                             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-                             // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                             var fullAddr = ''; // 최종 주소 변수
-                             var extraAddr = ''; // 조합형 주소 변수
-                             // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                             if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                                  fullAddr = data.roadAddress;
-                             } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                                  fullAddr = data.jibunAddress;
-                             }
-                             // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                             if (data.userSelectedType === 'R') {
-                                  //법정동명이 있을 경우 추가한다.
-                                  if (data.bname !== '') {
-                                      extraAddr += data.bname;
-                                  }
-                                  // 건물명이 있을 경우 추가한다.
-                                  if (data.buildingName !== '') {
-                                      extraAddr += (extraAddr !== '' ? ', '
-                                                + data.buildingName : data.buildingName);
-                                  }
-                                  // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                                  fullAddr += (extraAddr !== '' ? ' (' + extraAddr
-                                           + ')' : '');
-                             }
-                             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                             document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
-                             document.getElementById('address').value = fullAddr;
-                             // 커서를 상세주소 필드로 이동한다.
-                             document.getElementById('address2').focus();
-                        }
-                   }).open();
-     }
-     
+
+        $("#input_pw_now").focus( function() {
+                          $(this).css("font-size", "15px");
+                          $("article #pw_now").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
+                          $("#input_pw_now").css("background-color", "#fbf3f8");
+                          $("#back_id").css("display", "block");
+                     });
+           $("#input_pw").focus(function() {
+                          $(this).css("font-size", "15px");
+                          $("article #pw").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
+                          $("#input_pw").css("background-color", "#fbf3f8");
+                          $("#back_pw").css("display", "block");
+                     });
+           $("#input_pw_c").focus(function() {
+                          $(this).css("font-size", "15px");
+                          $("article #pw_c").css("top", "20px").css("font-size", "10px").css("font-weight", "bold").css("color","black");
+                          $("#input_pw_c").css("background-color","#fbf3f8");
+                          $("#back_pw_c").css("display", "block");
+                     });
+         
+           
+           
+           
+           $(".pop").blur(function(){
+        	   var inputval = $(this).val();
+        	   
+        	  if(inputval == ""){
+        		  $(this).next().css("display","block");
+          	  	  $(this).parent().css("margin-bottom","12px");
+           }else{
+        		  $(this).next().css("display","none");
+        		  $(this).parent().css("margin-bottom","5px");
+        	  }
+        	  
+        	  /* 비밀번호와 비밀번호 확인값이 다르면 경고메세지 출력 */
+        	  
+        	  
+        	  
+           });  
+           
+           
+           /* 비밀번호 재확인 input태그를 blur했을 때????????????????
+           	  비밀번호와 비밀번호 재확인 값을 비교*/
+           $("#input_pw_c").blur(function(){
+               var pw1 =$("#input_pw").val();
+               var pw2 =$("#input_pw_c").val();
+               /* 선행조건 : 둘다 값이 존재할 때만 적용가능. */
+           	  if(pw2 !=""){ /* 비밀번호와 비밀번호 확인값이 다를 때 동작 */
+         	   /* 	alert("=====>"); */
+         	   	if(pw1 == pw2){
+         	   		$(".checkpw").next().css("display","none");
+         	   	}else{
+         	   	 /*  1 . 비밀번호 확인 메시지에 "비밀번호가 일치하지 않습니다."출력
+                2 . 비밀번호확인(input) -> focus가가고
+                3 . 값을 초기화. */
+                $(this).next().text("비밀번호가 일치하지 않습니다.").css("display","block");
+                $(this).select;
+                
+         	   	}
+           	  }
+        	   
+           });
+           
+});
      
      
      
@@ -401,9 +329,31 @@ ul {
      
      
      $(document).on("click","#update",function(){
- 
 
-  
+   		var pw_now = $("#input_pw_now").val();
+ 		pw_new = $("#input_pw").val();
+ 		pw_renew = $("#input_pw_c").val();
+		alert(pw_now +","+ pw_new + "," +pw_renew);
+    	 
+    	if(pw_now == ""){
+    	  $("#input_pw_now").focus();
+  		  $("#input_pw_now").next().css("display","block");
+  	  	  $("#input_pw_now").parent().css("margin-bottom","12px");
+  	  	  
+    	}else if(pw_new == ""){
+  		  $("#input_pw").next().css("display","block");
+  	  	  $("#input_pw").parent().css("margin-bottom","12px");
+    	}else if(pw_renew == ""){
+  		  $("#input_pw_c").next().css("display","block");
+  	  	  $("#input_pw_c").parent().css("margin-bottom","12px");
+    	}else{
+  		  $(".pop").next().css("display","none");
+		  $(".pop").parent().css("margin-bottom","5px");
+    	}
+    	 
+    	 
+
+  		
 		/* 유효성체크 값이 유효한 값 확인 끝!!! */
 		$("#frm_mem").submit();
     	 
@@ -458,9 +408,9 @@ ul {
                         <div id="insert_box">
     
                              <div class="insert_info">
-                                  <label for="input_pw_now" class="insert_label" id="id"> 기존 비밀번호 입력 </label>
+                                  <label for="input_pw_now" class="insert_label" id="pw_now"> 기존 비밀번호 입력 </label>
                                   <input type="password" id="input_pw_now" class="set pop" name="input_pw_now">
-                              	  <span class="error" id="error_id">필수입력입니다.</span>
+                              	  <span class="error" id="error_pw_now">필수입력입니다.</span>
                              </div>
                              
                              <div class="insert_info">
@@ -479,8 +429,8 @@ ul {
                    <input type="hidden" name="updateId" value="${sessionScope.loginUser.id}">
                    
                    
-                             <a href="#" id="back"><div id="check" class="abox">취소하기</div></a>
-                             <a href="#" id="update"><div id="check2" class="abox">저장하기</div></a>
+                             <a href="index.bizpoll" id="back"><div id="check" class="abox">취소하기</div></a>
+                             <a id="update"><div id="check2" class="abox">저장하기</div></a>
               </form>
               
               
