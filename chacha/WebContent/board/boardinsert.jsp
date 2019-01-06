@@ -211,9 +211,10 @@
 	}); */
 	
 	
-	
-	
-	
+     $("#qna_selectbox").change(function() {
+        var qselectbox = $("#qna_selectbox").val();
+ 		$("#title").val(qselectbox);
+   });
 	
 </script>
 
@@ -233,10 +234,14 @@
 					<tr>
 						<th>SUBJCET</th>
 						<td>
-							<select>
-								<option>배송문의</option>
+							<select id="qna_selectbox">
+								<option  value="배송문의" selected="selected">배송문의</option>
+								<option  value="교환반품">교환반품</option>
+								<option  value="주문서변경">주문서변경</option>
+								<option  value="상품문의">상품문의</option>
 							</select>
-							<input id="title" name="title">
+							<input id="title" name="title" type="text">
+							<input type="text" class="email_idurl" id="email_url" placeholder="URL" name="email_url">
 							<span class="error">*제목은 필수입니다.</span>
 						</td>
 					</tr>

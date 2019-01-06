@@ -630,13 +630,14 @@ input#serch_keyword{
      }
      
      #close_btn{
-     	position: absolute;
-     	right: 486px;
-     	top: -22px;
-     	color: black!important;
-     	font-size: 25px;
-     	padding: 5px;
-     	display: block;
+	    position: absolute;
+	    right: -50px;
+	    top: -22px;
+	    color: black!important;
+	    font-size: 25px;
+	    padding: 5px;
+	    display: block;
+    	cursor: pointer;
      }
      
      #close_btn:hover {
@@ -700,9 +701,6 @@ input#serch_keyword{
           line-height: 59px;
           border-radius: 30px;
      }
-     #login_botton{
-          margin-top: 30px;
-     }
      
      #member{
 		color: #8C8C8C;
@@ -711,7 +709,6 @@ input#serch_keyword{
 	    list-style-type: none;
 	    position: absolute;
 	    width: 100%;
-	    top: 470px;
      }
      #member > a {
           color: #8C8C8C;
@@ -766,7 +763,7 @@ input#serch_keyword{
      
      #log_footer{
     	 position: relative;
-    	 top:195px;
+    	 top:160px;
      }
      #log_footer *{
           font-size: 11px;
@@ -817,7 +814,8 @@ input#serch_keyword{
      
      /* password 보이기 */
      #ckpw{
-	    margin-top: 13px;
+	    margin: 0 6px 13px 16px;
+	    vertical-align: -2px;
      }
 
 
@@ -828,14 +826,16 @@ input#serch_keyword{
 
 
 	#err_check{
-	display: none;
-	font-size: 12px;
-    display: block;
-    text-align: right;
-    margin-top: 10px;
-    color: #ef3232;
+		display: none;
+		font-size: 12px;
+	    text-align: right;
+	    color: #ef3232;
 	}
 
+	#err_checkarea{
+		height: 14px;
+		margin-top: 10px;
+	}
 
 
 
@@ -854,6 +854,7 @@ input#serch_keyword{
 	/* 사이드 메뉴 닫기 */
 	$(document).on("click","#close_side_btn", function(){
 		$("#side_nav").css("right","-220px");
+		
 	});
 	});
 	
@@ -921,6 +922,7 @@ input#serch_keyword{
        	  $("#inputid").val("");
        	  $("#inputpw").val("");
        	  $("#modal_all").css("display","none");
+       	  $("#err_check").css("display","none");
          });
     });
     
@@ -965,10 +967,10 @@ input#serch_keyword{
     				  	   data: "id="+val1+"&pw="+val2,
     				  	   success: function(data){
     				  		   if(data.message == "1"){
-    				  			   location.href=location.href;
+    				  			 location.reload();
     				  	       	  $("#modal_all").css("display","none");
     				  		   }else{
-    				  			   alert("로그인 실패")
+    				  			   /* alert("로그인 실패") */
     				  			   $("#err_check").text("아이디 또는 패스워드가 일치하지 않습니다.").css("display","block");
     				  		   }
     				  	   },
@@ -1195,7 +1197,8 @@ input#serch_keyword{
                                   <div id="TOP_TYPE" class="under_line header_nav">
                                       <ul>
                                            <li><a href="<%=path%>/#" class="under_dotted">블라우스</a></li>
-                                           <li><a href="<%=path%>/#" class="under_dotted">셔츠</a></li>
+                                           <li><a href="<%=path%>/#" class="under_dotted">티셔츠</a></li>
+                                           <li><a href="<%=path%>/#" class="under_dotted">맨투맨</a></li>
                                       </ul>
                                   </div>
                              </li>
@@ -1207,8 +1210,8 @@ input#serch_keyword{
                              <li><a href="<%=path%>/#">PANTS</a>
                                   <div id="PANTS_TYPE" class="under_line header_nav">
                                   	  <ul>
-	                                      <li><a href="<%=path%>/#" class="under_dotted">청바지</a></li> 
-	                                      <li><a href="<%=path%>/#" class="under_dotted">반바지</a></li>  
+	                                      <li><a href="<%=path%>/#" class="under_dotted">캐주얼</a></li> 
+	                                      <li><a href="<%=path%>/#" class="under_dotted">숏팬츠</a></li>  
 	                                      <li><a href="<%=path%>/#" class="under_dotted">슬렉스</a></li> 
                                       </ul>
                                   </div>
@@ -1359,12 +1362,14 @@ input#serch_keyword{
                    
                    <div class="login_input" id="chacha_pw">
                         <input type="password" placeholder="Password" class="input_IDPW" id="inputpw" name="inputpw"> 
-                        <input type="checkbox" id="ckpw">check
                    </div>
+                        <input type="checkbox" id="ckpw">check pw
                    
                    <div id="login_botton">
-                   <a href="" id="btn_login">로그인</a>
-                   <span id="err_check">로그인 정보가 옳지 않습니다.</span>
+                   <a href="#" id="btn_login">로그인</a>
+                   <div id="err_checkarea">
+                   		<span id="err_check">로그인 정보가 옳지 않습니다.</span>
+                   </div>
                    </div>
           <!--  </form> -->
            
@@ -1395,7 +1400,7 @@ input#serch_keyword{
                    &nbsp;
                    <span class="si">|</span>
                    &nbsp;
-                   <a href="http://localhost:8081/chacha/chacha_constract.html">회원가입</a>
+                   <a href="<%=path%>/chacha_constract.bizpoll">회원가입</a>
               </div>
           </section>
           

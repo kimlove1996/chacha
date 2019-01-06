@@ -102,15 +102,17 @@
 	
 	/* 회원탈퇴 버튼 */
 	#btn_button{
-	    margin: 0 auto;
-	    width: 434px;
-	    margin-top: 22px;
+	    margin: 30px auto;
+	    width: fit-content
+	}
+	
+	#btn_button > a{
+		margin : 0 30px;
 	}
 	
 	#btn_button > a:first-child {
 		border: 1px solid gray;
 	    padding: 13px 60px 13px 60px;
-	    float: left;
 	    background-color: #3b3b3b;
 	    color: white;
 	    letter-spacing: 2px;
@@ -119,7 +121,6 @@
 	#btn_button > a:last-child {
 		border: 1px solid gray;
 	    padding: 13px 60px 13px 60px;
-	    float: right;
 	    background-color: #ffffff;
 	    color: #2c2c2c;
 	    letter-spacing: 2px;

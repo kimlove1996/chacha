@@ -36,7 +36,7 @@
     width: 100%;
     height: 264px;
     bottom: 0px;
-    padding-top: 70px;
+    margin-top: 70px;
 }
 #foot_opt_list{
     width: 100%;

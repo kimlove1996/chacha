@@ -24,9 +24,9 @@ ul {
      position: relative;
 }
 #line {
-     margin: 0 auto;
-     width: 700px;
-     height: 921px;
+    margin: 220px auto 0 auto;
+    width: 700px;
+    height: 921px;
 }
 .c_logo {
      display: block;
@@ -60,7 +60,7 @@ ul {
      width: 700px;
      height: 700px;
      border: 9px double #f1e0ef;
-     border-radius: 375px;
+     border-radius: 100%;
 }
 #welcome_in {
      color: lightslategray;
@@ -71,7 +71,7 @@ ul {
      margin-top: 20px;
      position: relative;
      top: 73px;
-     margin: 0 auto;
+     margin: 0 auto 0 auto;
      border: none;
      border-color: #dbc4f3;
      border-bottom-style: solid;
@@ -85,6 +85,8 @@ ul {
      left: 10px;
      z-index: 3;
      font-size: 15px;
+     cursor: pointer;
+     text-align: left;
 }
 .set {
      width: 99%;
@@ -110,36 +112,34 @@ ul {
      background-color: #fbf3f8;
      z-index: 1;
 } */
-#check {
-	border-radius: 69px;
-    width: 104px;
-    height: 43px;
+#yes {
+    border-radius: 69px;
+    padding: 15px 42px;
+    color: white;
     background-color: #cfcaff;
     text-align: center;
     line-height: 43px;
     margin: -126px auto;
-
+    box-sizing: border-box;
+    position: relative;
+    left: 300px;
+    top: 104px;
 }
 #cancle {
-     float: left;
-     font-size: 17px;
-     margin: 17px 45px;
-     border-radius: 69px;
-     width: 104px;
-     height: 43px;
-     background-color: #d4caef;
-     text-align: center;
-     line-height: 43px;
-}
-#back {
-     color: whitesmoke;
-}
-#yes {
-     color: white;
+    font-size: 17px;
+    border-radius: 69px;
+    padding: 15px 42px;
+    background-color: #cbcbcb;
+    text-align: center;
+    line-height: 43px;
+    color: white;
+    left: 90%;
+    top: 176px;
+    position: relative;
 }
 #insert_box {
     position: relative;
-    bottom: 40px;
+    bottom: 15px;
     
 }
 #selmail {
@@ -151,13 +151,15 @@ ul {
      border: 1px solid #efdfe1;
      color: dimgray;
 }
+
+
 .email_idurl {
      width: 109.5px;
-     margin-left: 2px;
      border: none;
      z-index: 2;
-     padding: 2px 0 0 0;
+     padding: 2px 0 0 5px;
      height: 18px;
+     box-sizing: border-box;
 }
 #addr_box2{
      display: none;
@@ -170,10 +172,12 @@ ul {
 }
 #address2{
      padding-right: 10px;
+     width: 160px;
 }
 .addr_b{
      border:1px solid #efecee;
      margin-top: 2px;
+     padding-left: 5px;
 }
 #find_poaddr{
      height: 22px;
@@ -214,31 +218,424 @@ ul {
 </style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+/* 우편번호 찾기 API */
+function sample6_execDaumPostcode() {
+    new daum.Postcode(
+             {
+                  oncomplete : function(data) {
+                       // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                       // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                       // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                       var fullAddr = ''; // 최종 주소 변수
+                       var extraAddr = ''; // 조합형 주소 변수
+                       // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                       if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                            fullAddr = data.roadAddress;
+                       } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                            fullAddr = data.jibunAddress;
+                       }
+                       // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                       if (data.userSelectedType === 'R') {
+                            //법정동명이 있을 경우 추가한다.
+                            if (data.bname !== '') {
+                                extraAddr += data.bname;
+                            }
+                            // 건물명이 있을 경우 추가한다.
+                            if (data.buildingName !== '') {
+                                extraAddr += (extraAddr !== '' ? ', '
+                                          + data.buildingName : data.buildingName);
+                            }
+                            // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                            fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+                                     + ')' : '');
+                       }
+                       // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                       document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
+                       document.getElementById('address').value = fullAddr;
+                       // 커서를 상세주소 필드로 이동한다.
+                       document.getElementById('address2').focus();
+                  }
+             }).open();
+}
+
+
 
 
      $(document).ready(function() {
     	 
-    	 $("#input_id").blur(function(){
-   		  /* alert("test") */
-   		 var idVal = $(this).val();
-   		 var mid = $("#input_id");
-  	     /* trim: 앞뒤 공백 제거 */
-  	     var id = $.trim(mid.val());
-   		 /* ID 유효성 검사 */
-  	     var regId = /^[a-zA-Z0-9]{4,12}$/; /* 4~12자까지 영대소문자와 숫자만 입력가능. */
+	/*======================================================== ID 포커싱 및 유효성  */
+	$("#input_id").focus(function() {
+		$(this).css("font-size", "15px");
+		$("article #id").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
+		$("#input_id").css("background-color", "#fbf3f8");
+		$("#back_id").css("display", "block");
+	});
+
+	
+	$("#input_id").blur(function(){
+		var idVal = $(this).val(),
+		mid = $("#input_id"),
+		/* trim: 앞뒤 공백 제거 */
+		id = $.trim(mid.val()),
+		 /* ID 유효성 검사 */
+		regId = /^[a-zA-Z0-9]{4,12}$/; /* 4~12자까지 영대소문자와 숫자만 입력가능. */
     	     
-  	     
+
+	if(id == ""){
+		/* mid.focus(); */
+		mid.next().text("필수정보입니다.").css("display","block").css("color","red");
+		mid.parent().css("margin-bottom","12px");
+		return false;
+	}else if(!regId.test(id)){
+		/* mid.focus(); */
+		mid.next().text("4~12까지의 영문자와 숫자만 입력하세요.").css("display","block");
+		mid.parent().css("margin-bottom","12px");
+		return false;
+
+	}else if(id !=""){
+	/* + ID 중복체크 */ 
+		$.ajax({
+			/* ajax db갔다
+			view -> Controller -> Model -> DB */
+			url : "idCheck.bizpoll",
+			type: "POST",
+			dataType: "json",
+			data: "id=" + idVal,
+			success: function(data){
+				if(data.message == "-1"){
+					$("#input_id").next().text("이미 사용중인 ID입니다.").css("display","block").css("color","#F46665");
+			        $("#input_id").select;
+				}else{
+					$("#input_id").next().text("사용가능한 ID입니다.").css("display","block").css("color","#0000FF");
+					$("#input_pw").select;
+				}
+			},
+			error:function(){
+				alert("System Error!!!");
+			}
+		})
+	}
+
+});
+      
+      
+      
+      
+      
+      
+  	/*======================================================== 비밀번호 포커싱 및 유효성  */
+	 $("#input_pw").focus(function() {
+	      $(this).css("font-size", "15px");
+	      $("article #pw").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
+	      $("#input_pw").css("background-color", "#fbf3f8");
+	      $("#back_pw").css("display", "block");
+	 });
+	 
+	 $("#input_pw").blur(function(){
+		 var mpw = $("#input_pw"),
+		 pw = $.trim(mpw.val()),
+		 regPass = /^.*(?=.{8,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+	 
+		 if(pw == ""){
+		 	 /* mpw.focus(); */
+		 	 mpw.next().text("필수정보입니다.").css("display","block");
+		 	 mpw.parent().css("margin-bottom","12px");
+			 return false;
+		 }else if(!regPass.test(pw)){
+		 	 /* mpw.select(); */
+		 	 mpw.next().text("9~20자 이내 영문자, 숫자, 특수문자를 혼합하여 이용하세요.").css("display","block");
+		 	 mpw.parent().css("margin-bottom","12px");
+		 	 return false;
+		 }else{
+		 	 $("#input_pw").next().css("display","none");
+		 }
+	});
+      
+      
+      
+    /*========================================================비밀번호 재확인 및 유효성*/    
+	$("#input_pw_c").focus(function() {
+		$(this).css("font-size", "15px");
+		$("article #pw_c").css("top", "20px").css("font-size", "10px").css("font-weight", "bold").css("color","black");
+		$("#input_pw_c").css("background-color","#fbf3f8");
+		$("#back_pw_c").css("display", "block");
+	});
+	  
+	$("#input_pw_c").blur(function(){
+		var mpw = $("#input_pw"),
+			mpw2 = $("#input_pw_c"),
+			pw = $.trim(mpw.val()),
+			pw2 = $.trim(mpw2.val());
+		   	  
+		if(pw2 == ""){
+			/*  mpw.focus(); */
+			mpw2.next().text("필수정보입니다.").css("display","block");
+			mpw2.parent().css("margin-bottom","12px");
+			return false;
+		  	}else if(pw != pw2){
+			/* mpw2.select();
+			mpw2.focus(); */
+			mpw2.next().text("비밀번호가 일치하지 않습니다.").css("display","block");
+			mpw2.parent().css("margin-bottom","12px");
+			return false;
+		 }else{
+ 		 	$("#input_pw_c").next().css("display","none");
+		 }
+	 });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      /*========================================================이름 유효성*/    
+	$("#input_name").focus(function() {
+		$(this).css("font-size", "15px");
+		$("article #name").css("top", "20px").css("font-size", "10px").css("font-weight", "bold").css("color","black");
+		$("#input_name").css("background-color","#fbf3f8");
+		$("#back_name").css("display", "block");
+	});
+	     
+	$("#input_name").blur(function(){      
+		var mname = $("#input_name"),
+			name = $.trim(mname.val());
+	  	     
+		if(name == ""){
+			/* mname.focus(); */
+			mname.next().text("필수정보입니다.").css("display","block");
+			mname.parent().css("margin-bottom","12px");
+			return false;
+		}else{
+			$("#input_name").next().css("display","none");
+		}
+    });
+     
+      
+      
+      
+		
+		
+	      /*========================================================휴대번호 유효성*/
+	$("#input_ph").focus(function() {
+		$(this).css("font-size", "15px");
+		$("article #ph").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
+		$("#input_ph").css("background-color", "#fbf3f8");
+		$("#back_ph").css("display", "block");
+	});
+
+	$("#input_ph").blur(function(){
+		var mphone = $("#input_ph"),
+		phone = $.trim(mphone.val()),
+		regphone =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+	if(phone == ""){
+		/* mphone.focus(); */
+		mphone.next().text("필수정보입니다.").css("display","block");
+		mphone.parent().css("margin-bottom","12px");
+		return false;
+	}else if($.isNumeric(phone)==false){	/* 숫자값만 들어왔는지 체크! */
+		/* mphone.select(); */
+		mphone.next().text("숫자만 입력가능합니다.").css("display","block");
+		mphone.parent().css("margin-bottom","12px");
+			return false;
+	}else if(!regphone.test(phone)){
+		/* mphone.select(); */
+		mphone.next().text("올바른 값이 아닙니다.(숫자 11자리 입력)").css("display","block");
+		mphone.parent().css("margin-bottom","12px");
+		return false;
+	}else{
+		$("#input_ph").next().css("display","none");
+	}
+	
+	});
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      /*========================================================주소 유효성*/     
+
+	      
+	      
+	      
+	      
+    $("#addr").click(function() {
+		$("article #addr").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black").css("height","auto").css("width", "auto");
+		$("#addr_box1").css("border", "none").css("margin-bottom","23px");
+		$("#addr_box2").css("display", "block");
+	});
+
+    /* 우편번호, 주소 클릭했을 때 다음 우편번호 API 실행 */
+    $("#postcode").click(function(){
+   		$("#find_poaddr").click();
+    });
+    
+
+	      
+    $(".addr_b").blur(function(){
+		var zipcode = $("#postcode"),  
+			zipcodeVal = $.trim(zipcode.val()),
+			maddr1 = $("#address");
+			maddr2 = $("#address2");
+			addr1 = $.trim(maddr1.val()),
+			addr2 = $.trim(maddr2.val());   
+		   
+		if(zipcodeVal == ""){
+			/* $("#addr").click(); */
+			/* maddr2.focus(); */
+			$("#address2").next().text("우편번호를 입력하십시오.").css("display","block");
+			$("#address2").parent().css("margin-bottom","12px");
+			return false;
+		}else if(addr1 == ""){
+			/* maddr2.focus(); */
+			$("#address2").next().text("주소가 작성되지 않았습니다.").css("display","block");
+			$("#address2").parent().css("margin-bottom","12px");
+			return false;
+		}else if(addr2 == ""){
+			/* maddr2.focus(); */
+			$("#address2").next().text("상세주소를 입력해주십시오.").css("display","block");
+			$("#address2").parent().css("margin-bottom","12px");
+			return false;
+		}else{
+			$("#address2").next().css("display","none");
+			return false;
+		}
+	    
+    });  
+	      
+	      
+	    
+	    
+	    
+    /*========================================================이메일 유효성*/	    
+	$("#email").click(function() {
+		$("article #email").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black").css("width", "auto").css("height", "auto");
+		$("#input_email").css("display","block")
+		$("#insert_email").css("border", "none");
+		$(".email_idurl").css("border", "1px solid #efecee").css("font-size", "12px");
+	});
+	
+	$(".email_idurl").blur(function(){
+		var email1 = $("#email_id"),
+			email2 = $("#email_url"),
+			mailid = $.trim(email1.val())
+			mailurl = $.trim(email2.val());
+			mail = mailid +"@"+ mailurl;
+			regMail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	
+		if(mailid == "") {
+			/* $("#email").click(); */
+			/* email1.focus(); */
+			$("#selmail").next().text("이메일 ID를 입력하십시오").css("display","block");
+			$("#selmail").parent().css("margin-bottom","12px");
+			return false;
+		}else if(mailurl == ""){
+			/* email2.focus(); */
+			$("#selmail").next().text("이메일 URL을 입력하십시오").css("display","block");
+			$("#selmail").parent().css("margin-bottom","12px");
+			return false;
+		}else if(!regMail.test(mail)){
+			/* email1.select(); */
+			$("#selmail").next().text("E-mail이 아직 전부 작성되지 않았습니다.").css("display","block");
+			$("#selmail").parent().css("margin-bottom","12px");
+			return false;
+		}else{
+			$("#selmail").next().css("display","none");
+		}
+		
+		
+	});
+                
+    $("#selmail").change(function() {
+        var selmail = $("#selmail").val();
+        if (selmail == "directVal") {
+             $("#email_url").val("");
+             $("#email_url").focus("");
+        } else {
+             $("#email_url").val(selmail);
+        }
+   });
+      // 공란 확인하기
+/*       $(".pop").blur(function(){
+   	   var inputval = $(this).val();
+   	   
+   	  if(inputval == ""){
+   		  $(this).next().css("display","block");
+     	  $(this).parent().css("margin-bottom","12px");
+   	  
+      });  
+      });  */           
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================전체 유효성 체크 후값을 보냅니다. */
+$(document).on("click","#yes",function(){
+	 /* 유효성체크할 값을 받아온다. */
+		var form = $("#frm_mem"),
+		/* 아이디 */
+  		mid = $("#input_id");
+  		idVal = $("#input_id").val();
+ 	    id = $.trim(mid.val());
+ 	    regId = /^[a-zA-Z0-9]{4,12}$/, /* 4~12자까지 영대소문자와 숫자만 입력가능. */
+ 	    /* 패스워드 */
+		mpw = $("#input_pw"),
+		pw = $.trim(mpw.val()),
+		/* 패스워드재확인 */
+		mpw2 = $("#input_pw_c"),
+		pw2 = $.trim(mpw2.val()),
+		regPass = /^.*(?=.{8,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/,
+		/* 가입자명 */
+		mname = $("#input_name"),
+		name = $.trim(mname.val()),
+		/* 휴대폰번호 */
+		mphone = $("#input_ph"),
+		phone = $.trim(mphone.val()),
+		regphone =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/,
+		/* 주소 */
+		zipcode = $("#postcode"),
+		maddr1 = $("#address"),
+		addr1 = $.trim(maddr1.val()),
+		maddr2 = $("#address2"),
+		addr2 = $.trim(maddr2.val()),
+		zipcodeVal = $.trim(zipcode.val()),
+		/* 이메일 */
+		email1 = $("#email_id"),
+		mailid = $.trim(email1.val()),
+		email2 = $("#email_url"),
+		mailurl = $.trim(email2.val()),
+		mail = mailid +"@"+ mailurl,
+		regMail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		
+		
+		
+/* ID유효성 검사 */
   	   if(id == ""){
  	    	 mid.focus();
- 	    	 mid.next().css("display","block");
- 	    	 mid.parent().css("margin-bottom","12px");
  	    	 return false;
  	     }else if(!regId.test(id)){
  	    	 mid.focus();
- 		 	 mid.next().text("4~12까지의 영문자와 숫자만 입력하세요.").css("display","block");
- 	    	 mid.parent().css("margin-bottom","12px");
  	    	 return false;
- 		 	 
  	     }/* + ID 중복체크 */ 
  	     else if(id !=""){
 	   			  $.ajax({
@@ -250,10 +647,8 @@ ul {
 	   				  	   data: "id=" + idVal,
 	   				  	   success: function(data){
 	   				  		   if(data.message == "-1"){
-	   				  			 $("#input_id").next().text("이미 사용중인 ID입니다.").css("display","block").css("color","#F46665");
-			   		                 $("#input_id").select;
+			   		             $("#input_id").select;
 	   				  		   }else{
-	   				  			 $("#input_id").next().text("사용가능한 ID입니다.").css("display","block").css("color","#0000FF");
 	   				  			 $("#input_pw").select;
 	   				  		   }
 	   				  	   },
@@ -263,380 +658,85 @@ ul {
 	   			  })
 	   		  }
    		  
-   	  });
-    	 
-    	 
-    	 
-                   $("#input_id").focus(
-                             function() {
-                                  $(this).css("font-size", "15px");
-                                  $("article #id").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#input_id").css("background-color", "#fbf3f8");
-                                  $("#back_id").css("display", "block");
-                             });
-                   $("#input_pw").focus(
-                             function() {
-                                  $(this).css("font-size", "15px");
-                                  $("article #pw").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#input_pw").css("background-color", "#fbf3f8");
-                                  $("#back_pw").css("display", "block");
-                             });
-                   $("#input_pw_c").focus(
-                                      function() {
-                                           $(this).css("font-size", "15px");
-                                           $("article #pw_c").css("top", "20px").css("font-size", "10px").css("font-weight", "bold").css("color","black");
-                                           $("#input_pw_c").css("background-color","#fbf3f8");
-                                           $("#back_pw_c").css("display", "block");
-                                      });
-                   $("#input_name").focus(
-                                      function() {
-                                           $(this).css("font-size", "15px");
-                                           $("article #name").css("top", "20px").css("font-size", "10px").css("font-weight", "bold").css("color","black");
-                                           $("#input_name").css("background-color","#fbf3f8");
-                                           $("#back_name").css("display", "block");
-                                      });
-                   $("#input_ph").focus(
-                             function() {
-                                  $(this).css("font-size", "15px");
-                                  $("article #ph").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#input_ph").css("background-color", "#fbf3f8");
-                                  $("#back_ph").css("display", "block");
-                             });
-                   
-                   
-                   $("#addr").click(function() {
-                                  $("article #addr").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#addr_box1").css("height", "83px");
-                                  $("#addr_box1").css("border", "none");
-                                  $("#addr_box2").css("display", "block");
-                                  $("#addr_box2").css("display", "block");
-                                  $("#addr").css("width", "45px");
-                                  $("#addr").css("height", "10px");
-                                  /* $(".addr_b").css("border-bottom", "2px solid rgb(226, 215, 236)"); */
-                                  
-                             });
-                   
-                   $("#email").click(
-                             function() {
-                                  $("article #email").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
-                                  $("#input_email").css("display","block")
-                                  $("#insert_email").css("border", "none");
-                                  $(".email_idurl").css("border", "1px solid #efecee");
-                                  $(".email_idurl").css("font-size", "12px");
-                                  $("#email").css("width", "55px");
-                                  $("#email").css("height", "10px");
-                             });
-                             
-                             
-                   
-                   
-                   $("#selmail").change(function() {
-                        var selmail = $("#selmail").val();
-                        if (selmail == "directVal") {
-                             $("#email_url").val("");
-                             $("#email_url").focus("");
-                        } else {
-                             $("#email_url").val(selmail);
-                        }
-                   });
-                   
-                   
-                   
-                   
-                   $(".pop").blur(function(){
-                	   var inputval = $(this).val();
-                	   
-                	  if(inputval == ""){
-                		  $(this).next().css("display","block");
-	                  	/*  $(".error").css("display","block"); */
-	                 	  $(this).parent().css("margin-bottom","12px");
-	                  }else{
-	                  	  /* $(".error").css("display","none"); */
-                		  /* $(this).next().css("display","none");
-                		  $(this).parent().css("margin-bottom","5px"); */
-                	  }
-                	  
-                	  /* 비밀번호와 비밀번호 확인값이 다르면 경고메세지 출력 */
-                	  
-                	  
-                	  
-                	  
-                	  
-                	  
-                   });  
-                   
-                   
-                   /* 비밀번호 재확인 input태그를 blur했을 때????????????????
-                   	  비밀번호와 비밀번호 재확인 값을 비교*/
-                   $("#input_pw_c").blur(function(){
-	                      var pw1 =$("#input_pw").val();
-	                      var pw2 =$("#input_pw_c").val();
-	                      /* 선행조건 : 둘다 값이 존재할 때만 적용가능. */
-	   	              	  if(pw2 !=""){ /* 비밀번호와 비밀번호 확인값이 다를 때 동작 */
-	   	            	   /* 	alert("=====>"); */
-	   	            	   	if(pw1 == pw2){
-	   	            	   		$(".checkpw").next().css("display","none");
-	   	            	   	}else{
-	   	            	   	 /*  1 . 비밀번호 확인 메시지에 "비밀번호가 일치하지 않습니다."출력
-		   		                 2 . 비밀번호확인(input) -> focus가가고
-		   		                 3 . 값을 초기화. */
-		   		                 $(this).next().text("비밀번호가 일치하지 않습니다.").css("display","block");
-		   		                 $(this).select;
-		   		                 
-	   	            	   	}
-	   	              	  }
-                	   
-                   });
-                   
-                   
-          
-                  
-                    
-	                
-                   
-                   
-             });
-     
-     
-     
-     
-     
-     
-     function sample6_execDaumPostcode() {
-          new daum.Postcode(
-                   {
-                        oncomplete : function(data) {
-                             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-                             // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                             var fullAddr = ''; // 최종 주소 변수
-                             var extraAddr = ''; // 조합형 주소 변수
-                             // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                             if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                                  fullAddr = data.roadAddress;
-                             } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                                  fullAddr = data.jibunAddress;
-                             }
-                             // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                             if (data.userSelectedType === 'R') {
-                                  //법정동명이 있을 경우 추가한다.
-                                  if (data.bname !== '') {
-                                      extraAddr += data.bname;
-                                  }
-                                  // 건물명이 있을 경우 추가한다.
-                                  if (data.buildingName !== '') {
-                                      extraAddr += (extraAddr !== '' ? ', '
-                                                + data.buildingName : data.buildingName);
-                                  }
-                                  // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                                  fullAddr += (extraAddr !== '' ? ' (' + extraAddr
-                                           + ')' : '');
-                             }
-                             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                             document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
-                             document.getElementById('address').value = fullAddr;
-                             // 커서를 상세주소 필드로 이동한다.
-                             document.getElementById('address2').focus();
-                        }
-                   }).open();
-     }
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     $(document).on("click","#yes",function(){
-    	 /* 유효성체크하는 값을 받아온다. */
-	    	 var form = $("#frm_mem"),
-	    	 mpw = $("#input_pw"),
-	    	 mpw2 = $("#input_pw_c"),
-	    	 mname = $("#input_name"),
-	    	 mphone = $("#input_ph"),
-	    	 email1 = $("#email_id"),
-	    	 email2 = $("#email_url"),
-	    	 zipcode = $("#postcode"),
-	    	 maddr1 = $("#address");
-	    	 maddr2 = $("#address2");
-   
-     
-
-     
-     
-     
-     
-     
-     
-      
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     /* Password 유효성 검사 */
-     var pw = $.trim(mpw.val());
-     var pw2 = $.trim(mpw2.val());
-     /* 영문자, 숫자 포함 특수문자 사용가능.8~20자리 */
-     var regPass = /^.*(?=.{8,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
-
-     
-     if(pw == ""){
-    	 mpw.focus();
-    	 mpw.next().text("필수정보입니다.").css("display","block");
-    	 mpw.parent().css("margin-bottom","12px");
+		
+		
+	/* Password 유효성 검사 */
+	if(pw == ""){
+		 mpw.focus();
 		 return false;
-     }else if(!regPass.test(pw)){
-    	 mpw.select();
-    	 mpw.next().text("9~20자 이내 영문자, 숫자, 특수문자를 혼합하여 이용하세요.").css("display","block");
-    	 mpw.parent().css("margin-bottom","12px");
-    	 return false;
-     }else if(pw2 == ""){
-    	 mpw2.focus();
-    	 mpw2.next().text("필수정보입니다.").css("display","block");
-    	 mpw2.parent().css("margin-bottom","12px");
+	}else if(!regPass.test(pw)){
+		 mpw.select();
 		 return false;
-     }else if(pw != pw2){
-    	 mpw2.select();
-    	 mpw2.focus();
-    	 mpw2.next().text("비밀번호가 일치하지 않습니다.").css("display","block");
-    	 mpw2.parent().css("margin-bottom","12px");
+	}else if(pw2 == ""){
+		 mpw2.focus();
+		 return false;
+	}else if(pw != pw2){
+		 mpw2.select();
+		 mpw2.focus();
 		 return false; 
-     } 
-     
-     
-     
-     /* 이름 유효성 체크*/
-     var name = $.trim(mname.val());
-     
-     if(name == ""){
-    	 mname.focus();
-    	 mname.next().text("필수정보입니다.").css("display","block");
-    	 mname.parent().css("margin-bottom","12px");
-    	 return false;
-     }
-     
-     
-     
-     
-     
-  
-     /* 과제 : 주소, 전화번호 유효성 체크 
-     1 . 전화번호는 숫자값만 들어오는 유효성 체크 추가 */
-     
-     
-     
-     var phone = $.trim(mphone.val());
-     var regphone =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+	} 
 
 
-     
-     if(phone == ""){
-    	 mphone.focus();
-    	 mphone.next().text("필수정보입니다.").css("display","block");
-    	 mname.parent().css("margin-bottom","12px");
-    	 return false;
-     }else if($.isNumeric(phone)==false){	/* 숫자값만 들어왔는지 체크! */
-    	 mphone.select();
-    	 mphone.next().text("숫자만 입력하세요.").css("display","block");
-    	 mphone.parent().css("margin-bottom","12px");
-    	 return false;
-     }else if(!regphone.test(phone)){
-    	 mphone.select();
-    	 mphone.next().text("올바른 값을 입력하세요.").css("display","block");
-    	 mphone.parent().css("margin-bottom","12px");
-    	 return false;
-     }
 
-
-     
-     
-     
-     
-     
-     /*  mail
-     1 . "" check
-     2 . 정규식 check */
-     
-     
-     var zipcodeVal = $.trim(zipcode.val());
-     var addr1 = $.trim(maddr1.val());
-     var addr2 = $.trim(maddr2.val());
-     
-     /* 우편번호, 주소 클릭했을 때 다음 우편번호 API 실행 */
-     $("#postcode").click(function(){
-    	 $("#find_poaddr").click();
-     });
-     
-     
-     
-     if(zipcodeVal == ""){
-    	 $("#addr").click();
-    	 maddr2.focus();
-    	 $("#address2").next().text("우편번호를 입력하십시오.").css("display","block");
-    	 $("#address2").parent().css("margin-bottom","12px");
-    	 return false;
-     }else if(addr1 == ""){
-    	 maddr2.focus();
-    	 $("#address2").next().text("주소가 작성되지 않았습니다.").css("display","block");
-    	 $("#address2").parent().css("margin-bottom","12px");
-    	 return false;
-     }else if(addr2 == ""){
-    	 maddr2.focus();
-    	 $("#address2").next().text("상세주소를 입력해주십시오.").css("display","block");
-    	 $("#address2").parent().css("margin-bottom","12px");
-    	 return false;
-     }else{
-    	 $("#address2").next().css("display","none");
-    	 $("#address2").parent().css("margin-bottom","12px");
-    	 return false;
-     }
-     
-     
-     
-     /* mail 유효성 체크 */
-     var mailid = $.trim(email1.val())
-     var mailurl = $.trim(email2.val());
-     var mail = mailid +"@"+ mailurl;
-     var regMail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-
-     if(mailid == "") {
-    	 $("#email").click();
-    	 email1.focus();
-    	 $("#selmail").next().css("display","block");
-    	 $("#selmail").parent().css("margin-bottom","12px");
+	/* 이름 유효성 체크*/
+	if(name == ""){
+		 mname.focus();
 		 return false;
-     }else if(mailurl = ""){
-    	 email2.focus();
-    	 $("#selmail").next().css("display","block");
-    	 $("#selmail").parent().css("margin-bottom","12px");
+	}
+
+
+
+	/* 휴대번호 유효성 체크 */
+	if(phone == ""){
+		 mphone.focus();
 		 return false;
-     }else if(!regMail.test(mail)){
-    	 email1.select();
-    	 $("#selmail").next().text("E-mail형식이 올바르지 않습니다.").css("display","block");
-    	 $("#selmail").parent().css("margin-bottom","12px");
+	}else if($.isNumeric(phone)==false){	/* 숫자값만 들어왔는지 체크! */
+		 mphone.select();
 		 return false;
-     }
+	}else if(!regphone.test(phone)){
+		 mphone.select();
+		 return false;
+	}
+
+	/* 주소 유효성 체크 */
+	if(zipcodeVal == ""){
+		 $("#addr").click();
+		 maddr2.focus();
+		 return false;
+	}else if(addr1 == ""){
+		 maddr2.focus();
+		 return false;
+	}else if(addr2 == ""){
+		 maddr2.focus();
+		 return false;
+	}
+
+	/* 이메일 유효성 체크 */
+	if(mailid == "") {
+		 $("#email").click();
+		 email1.focus();
+		 return false;
+	}else if(mailurl = ""){
+		 email2.focus();
+		 return false;
+	}else if(!regMail.test(mail)){
+		 email1.select();
+		 return false;
+	}
+
+
+
+
+	/* 유효성체크 값이 유효한 값 확인 끝 */
+	 form.submit();
+	});
      
      
      
      
-     /* 유효성체크 값이 유효한 값 확인 끝 */
-      form.submit();
      
      
      
-     
-     });
      
      
      
@@ -659,9 +759,7 @@ ul {
 </script>
 </head>
 <body id="indexbody">
-     <div id="cancle">
-          <a href="http://localhost:8081/chacha/include/header.html" id="back">취소</a>
-     </div>
+         
      <div id="line">
           <header>
               <div id="header" class="divsize">
@@ -718,10 +816,9 @@ ul {
                              	  <span class="error" id="error_ph">필수정보입니다.</span>
                              </div>
                              
-                             <div class="insert_info" id="addr_box1">
+                             <div class="insert_info addr_box" id="addr_box1">
                                   <label for="input_addr" class="insert_label" id="addr" > 주소 입력 </label>
-                                  
-                                  <div id="addr_box2">
+                                  <div id="addr_box2" class="addr_box">
                                   <input type="text" id="postcode" class="addr_b" placeholder="우편번호" readonly="readonly" name="postcode">
                                   <input type="button" id="find_poaddr" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
                                   <input type="text" id="address" class="addr_b" placeholder="주소" readonly="readonly" name="address">
@@ -752,8 +849,9 @@ ul {
                              
                              
                         </div>
+                        <a href="#" id="yes" class="abox">확인</a>
+                        <a href="index.bizpoll" id="cancle">돌아가기</a>
                    </div>
-                             <a href="#" id="yes"><div id="check" class="abox">확인</div></a>
               </form>
               
               

@@ -11,7 +11,7 @@ public class TunningAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "welcom.jsp";
+		String url = "remain.jsp";
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);

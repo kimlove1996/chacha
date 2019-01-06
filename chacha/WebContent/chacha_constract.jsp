@@ -286,7 +286,7 @@
 	#footer > ul > li a:hover{
 		color: #1fbc02;
 	}
-	#err_check {
+	#construct_err_check {
 		display:none;
 	}
 	#err_check_msg{
@@ -341,7 +341,7 @@
 			if(ck1 == true && ck2 == true) {
 				location.href = "member.bizpoll";
 			}else{
-				$("#err_check").css("display","block");
+				$("#construct_err_check").css("display","block");
 			}
 		});
 		
@@ -520,7 +520,7 @@
 						<li id="terms_ul_li4"></li>
 					</ul>
 				</div>
-				<div id="err_check">
+				<div id="construct_err_check">
 					<span id="err_check_msg">차차 이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해주세요.</span>
 				</div>
 				<div class="btn_double_area"> <!-- 동의체크 -->

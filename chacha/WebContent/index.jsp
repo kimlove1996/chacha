@@ -240,7 +240,7 @@ this.fade{
 		<div id="best_img_line">
 			<div id="best_img">
 			
-				<c:forEach items="${bestlist}" var="bestDto"> <!-- bestDto가 한줄 씩 빼내옴. -->
+				<c:forEach items="${bestlist}" var="bestDto"> <!-- bestDto에서 한줄 씩 빼내옴. -->
 					<a><div>
 						<a href="detailProduct.bizpoll">
 							<img src="img/${bestDto.p_img}">

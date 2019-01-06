@@ -144,19 +144,19 @@
 	#qna_all th:nth-child(2){
 		width: 188px;
 	}
-	#qna_all th:nth-child(3){
+/* 	#qna_all th:nth-child(3){
 		width: 108px;
-	}
-	#qna_all th:nth-child(4){
+	} */
+	#qna_all th:nth-child(3){
 		width: 170px;
 	}
+	#qna_all th:nth-child(4){
+		width: 645px;
+	}
 	#qna_all th:nth-child(5){
-		width: 550px;
+		width: 210px;
 	}
 	#qna_all th:nth-child(6){
-		width: 150px;
-	}
-	#qna_all th:nth-child(7){
 		width: 150px;
 	}
 	
@@ -523,11 +523,9 @@
 			
 			
 			
-			<div id="qna_table" class="clr">
-			
-			
+			<div id="qna_table" class="clr"></div>
 								
-			<table>
+			<table id="">
 			<div id="serch_selecting">
 				<select id="selected" name="flag">
 					<option selected="selected" value="3">
@@ -554,12 +552,11 @@
 				
 				
 				
-				</div>
+			</div>
 					<thead>
 					<tr>
 						<th>NO</th>
 						<th>PRODUCT</th>
-						<th>CATEGORY</th>
 						<th>SUBJECT</th>
 						<th>CONTENTS</th>
 						<th>WRITER</th>
@@ -600,17 +597,17 @@
 							</c:if>
 						</td>
 						
-						<!-- 문의종류 -->
-						<td>dddddddddd</td>
+						<%-- <!-- 문의종류 -->
+						<td>${bDto.title}</td> --%>
 						
 						<!-- 글 제목 -->
 						<td  class="">
-							<a href="boardViewcnt.bizpoll?bno=${bDto.bno}">${bDto.title}</a>
+							<a href="boardViewcnt.bizpoll?bno=${bDto.bno}" style="color:black">${bDto.title}</a>
 						</td>
 						
 						<!-- 내용 -->
 						<td>
-							<a href="boardViewcnt.bizpoll?bno=${bDto.bno}">${bDto.content}</a>
+							<a href="boardViewcnt.bizpoll?bno=${bDto.bno}" style="color:black">${bDto.content}</a>
 								<c:if test="${today2 == regdate2}">
 									<span class="new_time">N</span>
 								</c:if>

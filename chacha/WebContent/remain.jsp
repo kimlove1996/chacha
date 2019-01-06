@@ -71,7 +71,7 @@
 		<div id="welcom">
 			<div id="welcom_text">
 				<div id="welcom_text_in">
-					<span>CHACHA 홈페이지에 오신 것을 환영합니다.<br>
+					<span>CHACHA 홈페이지를 이용해주셔서 감사합니다.<br>
 					<span id="rCnt">3</span>초 뒤 메인화면으로 이동됩니다.</span>
 					
 					
