@@ -117,8 +117,8 @@ public class BoardDAO {
 			
 			//현재시간과 조회수 1증가한 시간을 비교해서 24시간(1일)이 지났으면
 			//조회수 1증가
-			if(current_time - update_time > 10000) { //!10000은 10초 //@ false!
-				//현 시간 - update시간		> 10초	// 1시간은 24 * 60 * 60 * 1000
+			if(current_time - update_time > 86400000) { //!10000은 10초 //@ false!
+				//현 시간 - update시간		> 24시간	// 1일은 24 * 60 * 60 * 1000
 				result = sqlSession.update("viewCnt", bno);
 				sqlSession.commit();
 				

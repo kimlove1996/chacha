@@ -255,34 +255,6 @@ $(document).ready(function(){
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-/*	$(document).on("change","#uploadfile",function(){
-		var filename = this.files[0].name; //
-		var filesize = this.files[0].size;
-		if(filesize.length<1){
-			$("#file-name").text("선택된 파일없음");
-			$("#file_close_btn").css("display","none");
-		}else{
-			$("#file-name").text(filename);
-			$("#file_close_btn").css("display","inline-block");
-		}
-	});
-	
-*/	
-	
-	
-	
-	
-	
-	
-	
-	
 </script>
 
 </head>

@@ -20,7 +20,13 @@
 	#boardinsert_all{
 		padding-top: 233px;
 	}
-
+	
+	#title{
+		border: none;
+	    font-weight: bold;
+	    font-size: 15px;
+	}
+	
 	#qnatitle{
 	    width: 170px;
 	    margin: 0 auto;
@@ -162,19 +168,17 @@
 </style>
 <script type="text/javascript">
 	$(document).on("click","#enroll", function(elClickedObj){
-			alert("훔...?")
 		var title = $("#title").val();
 		//스마트에디터로 content부분 값 넘겨받는 부분
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		
 		if(title == ""){
-			alert("제목없음~")
 			$("#title").focus();
 			$(".error").css("display","inline-block");
 			return;
 		}
 		$("#frm_bin").submit();
-		alert("보내기 성공!")
+		/* alert("보내기 성공!") */
 	});
 	
 	
@@ -185,9 +189,33 @@
 	
 	
 	$(document).on("change","#uploadfile",function(){
-		var filename = this.files[0].name;
-		$("#file-name").text(filename);
-		$("#file_close_btn").css("display","inline-block");
+		var filesize = $(this)[0].files; /* File( 들 )을 첨부할 수 있으니 배열타입의 값을 담아놓는다. */
+		
+		if(filesize.length < 1){ //파일이 안들어왔을 경우.
+			$("#file-name").text("선택된 파일 없음.");
+			$("#file_close_btn").css("display", "none");
+		}else{
+			/*  첨부파일이 있다면 첨부파일의 이름과 사이즈를 불러옴. */
+			var filename = this.files[0].name;
+			var filesize = this.files[0].size;
+			var maxSize = 10 * 1024 * 1024; /* 10메가 바이트로 용량 제한.*/
+			
+			if(filesize > maxSize){ //용량 제한 걸림.
+				alert("첨부파일 사이즈는 10MB 이내로 등록 가능합니다.");
+				$("#file-name").text("선택된 파일 없음.");
+				
+				/* 화면단에서는 input type = "file"용량을 제한하는 코드가 없습니다. 
+					따라서 경고창은 뜨나 실제 10mb 넘는 파일이 들어가 있는 상태가 됩니다.
+					반드시 초기화를 시켜 없애는 과정이 필요합니다. =>만약 과정을 거치지 않는 경우 Action단위에서 오류 발생.*/
+				$("#uploadfile").val("");
+				$("#now-file-size").val(0);
+			}else{//첨부 가능.
+				$("#now-file-size").val(filesize);
+				$("#file-name").text(filename);
+				$("#file_close_btn").css("display","inline-block");
+			}
+		}
+		
 	});		
 		
 		
@@ -198,23 +226,12 @@
 		$("#file_close_btn").css("display","none");
 	});
 	
-	/* $(document).on("change","#uploadfile", function(){
-		var filesize = $(this)[0].files;
-		if(filesize.length < 1){
-			$("#file-name").text("선택된 파일 없음");
-			$("#close_btn").css("display","none");
-		}else{
-			var filename = this.files[0].name;
-			$("#file-name").text(filename);
-			$("#close_btn").css("display","block");
-		}
-	}); */
 	
 	
-     $("#qna_selectbox").change(function() {
+	$(document).on("change","#qna_selectbox",function(){
         var qselectbox = $("#qna_selectbox").val();
- 		$("#title").val(qselectbox);
-   });
+ 		$("#title").val(qselectbox+" 합니다.");
+	});
 	
 </script>
 
@@ -240,8 +257,7 @@
 								<option  value="주문서변경">주문서변경</option>
 								<option  value="상품문의">상품문의</option>
 							</select>
-							<input id="title" name="title" type="text">
-							<input type="text" class="email_idurl" id="email_url" placeholder="URL" name="email_url">
+							<input id="title" name="title" readonly="readonly" type="text" value="배송문의합니다.">
 							<span class="error">*제목은 필수입니다.</span>
 						</td>
 					</tr>

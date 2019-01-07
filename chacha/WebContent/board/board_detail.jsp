@@ -587,6 +587,7 @@
 	    font-size: 14px;
 	    display: none;
 	    font-weight: bold;
+	    margin-top: 8px;
 	} 
 	 
 	 
