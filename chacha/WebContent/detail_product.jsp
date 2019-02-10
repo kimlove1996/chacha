@@ -29,8 +29,6 @@
 }
 
 #detail_img {
-	width: 45%;
-	height: 95%;
 	float: left;
 	margin: 0 auto;
 }
@@ -145,17 +143,21 @@
 	float: left;
 	margin-left: 8px;
 	margin-top: -4px;
+	border: 1px solid lightgrey;
 }
 
 #sub_img>ul {
-	margin-left: 79px;
+	margin-left: 90px;
 	list-style-type: none;
 }
 
 #main_img>img {
-	width: 364px;
-	margin-left: -17px;
-	margin-bottom: 17px;
+    width: 364px;
+    height:511px;
+    margin-bottom: 17px;
+    border: 1px solid lightgray;
+    box-sizing: border-box;
+    background-size: cover;
 }
 
 #base-button {
@@ -168,9 +170,35 @@
 	color: black;
 }
 
+.image_detail0{
+	background-image: url(img/${productview.p_img});
+}
+.active1{background-image: url(img/${productview.p_img});}
+.active2{background-image: url(img/ex2.jpg);}
+.active3{background-image: url(img/ex3.jpg);}
+.active4{background-image: url(img/ex4.jpg);}
 </style>
 <script type="text/javascript">
+$(document).ready(function(){
 	
+	$("#img_ex1").mouseover(function(){
+		$("#image_detail").removeClass("image_detail0 active2 active3 active4");
+		$("#image_detail").addClass("active1");
+	}); 
+	$("#img_ex2").mouseover(function(){
+		$("#image_detail").removeClass("image_detail0 active1 active3 active4");
+		$("#image_detail").addClass("active2");
+	}); 
+	$("#img_ex3").mouseover(function(){
+		$("#image_detail").removeClass("image_detail0 active1 active2 active4");
+		$("#image_detail").addClass("active3");
+	}); 
+	$("#img_ex4").mouseover(function(){
+		$("#image_detail").removeClass("image_detail0 active1 active2 active3");
+		$("#image_detail").addClass("active4");
+	}); 
+	
+});
 </script>
 </head>
 <body>
@@ -178,34 +206,35 @@
 		<div id="detatil_area">
 			<div id="detail_img">
 				<div id="main_img">
-					<img alt="" src="img/cloth001.gif">
+				 <%-- <img id="image_detail" alt="" src="img/${productview.p_img}"> --%>
+				 <img class="image_detail0" id="image_detail">
+					
 				</div>
 				<div id="sub_img">
 					<ul>
-						<li><img alt="" src="img/cloth001-1.jpg"></li>
-						<li><img alt="" src="img/cloth001-2.jpg"></li>
-						<li><img alt="" src="img/cloth001-3.jpg"></li>
-						<li><img alt="" src="img/cloth001-4.jpg"></li>
+						<li><img id="img_ex1" src="img/ex1.jpg"></li>
+						<li><img id="img_ex2" alt="" src="img/ex2.jpg"></li>
+						<li><img id="img_ex3" alt="" src="img/ex3.jpg"></li>
+						<li><img id="img_ex4" alt="" src="img/ex4.jpg"></li>
 					</ul>
 				</div>
 			</div>
 
 			<div id="detail_info">
 				<div id="headingArea">
-					<h2>에브리데이 라운드 니트</h2>
-					<span id="delivery">(해외배송 가능 상품)</span><img alt=""
-						src="img/custom_136.gif">
+					<h2>${productview.p_name}</h2>
+					<span id="delivery">(해외배송 가능 상품)</span>
+					<img alt="" src="img/custom_136.gif">
 				</div>
 				<table id="table01">
 					<tr>
 						<th><span>상품 간략설명</span></th>
-						<td><span>울 50% 함유, 어디에나<br>찰떡이야 베이직 울 니트☆
-						</span></td>
+						<td><span>${productview.p_ex}</span></td>
 					</tr>
 
 					<tr>
 						<th>판매가</th>
-						<td>19,800원</td>
+						<td>${productview.p_price}</td>
 					</tr>
 
 					<tr>

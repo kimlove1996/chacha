@@ -83,6 +83,12 @@ public class ProductDTO {
 		this.p_indate = p_indate;
 	}
 
+	@Override
+	public String toString() {
+		return "ProductDTO [p_code=" + p_code + ", p_name=" + p_name + ", p_ex=" + p_ex + ", p_price=" + p_price
+				+ ", p_img=" + p_img + ", p_review=" + p_review + ", p_indate=" + p_indate + "]";
+	}
+
 	
 	
 	

@@ -260,19 +260,18 @@ this.fade{
 			
 				<c:forEach items="${bestlist}" var="bestDto"> <!-- bestDto에서 한줄 씩 빼내옴. -->
 					<div>
-						<a href="detailProduct.bizpoll?pno=${bestDto.p_code}">
+						<a href="detailProduct.bizpoll?p_code=${bestDto.p_code}">
 							<img class="displ_img" src="img/${bestDto.p_img}">
 						</a>
 							<br>
 							<br>
-						<a href="detailProduct.bizpoll?pno=${bestDto.p_code}">
+						<a href="detailProduct.bizpoll?p_code=${bestDto.p_code}">
 							<Strong class="displ_name">${bestDto.p_name}</Strong>
 						</a>
 						
 						
 								<hr>
 								${bestDto.p_ex}
-								 <%-- <a href="detailProduct.bizpoll?pno=${bestDto.p_code}"> --%> --%>그리고${bestDto.p_code} <!-- </a> -->
 								<br>
 								<br>
 								<%-- ${bestDto.p_price}<br> --%>
@@ -323,12 +322,12 @@ this.fade{
 			
 				<c:forEach items="${newlist}" var="newDto"> <!-- bestDto에서 한줄 씩 빼내옴. -->
 					<div>
-						<a href="detailProduct.bizpoll?pno=${bestDto.p_code}">
+						<a href="detailProduct.bizpoll?p_code=${newDto.p_code}">
 							<img class="displ_img" src="img/${newDto.p_img}">
 						</a>
 							<br>
 							<br>
-						<a href="detailProduct.bizpoll?pno=${bestDto.p_code}">
+						<a href="detailProduct.bizpoll?p_code=${newDto.p_code}">
 							<Strong class="displ_name">${newDto.p_name}</Strong>
 						</a>
 						

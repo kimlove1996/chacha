@@ -68,6 +68,21 @@ public class ProductDAO {
 		}
 		return newlist;
 	}
+
+	public ProductDTO productDetail(String p_code) {
+		sqlSession = sqlSessionFactory.openSession();
+		ProductDTO pDto = null;
+		
+		try  {
+			pDto = sqlSession.selectOne("productDetail", p_code);
+			/*System.out.println(pDto);*/
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return pDto;
+	}
 	
 
 //	======================================================================	

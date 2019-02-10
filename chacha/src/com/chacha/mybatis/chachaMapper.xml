@@ -27,6 +27,13 @@
 	]]>
 	</select>
 
+	<!-- 상세상품 -->
+	<select id="productDetail" resultType="com.chacha.dto.ProductDTO">
+	<![CDATA[
+	SELECT * FROM chachaproduct
+	WHERE p_code = #{p_code}
+	]]>
+	</select>
 
 <!-- ======================================================================== -->
 		<!-- MemberDAO -->
