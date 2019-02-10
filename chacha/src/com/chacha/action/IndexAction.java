@@ -30,8 +30,10 @@ public class IndexAction implements Action{
 		
 		//싱글톤 패턴
 		ProductDAO pDao = ProductDAO.getInstance();
+		//베스트 상품
 		List<ProductDTO> bestlist = pDao.bestView();
-		
+		//신상품
+		List<ProductDTO> newlist = pDao.newView();
 		
 		
 		
@@ -44,6 +46,7 @@ public class IndexAction implements Action{
 		//View단으로 전송할 데이터를 담는다.
 		//					(이름표       , 실제 값   );
 		request.setAttribute("bestlist", bestlist);
+		request.setAttribute("newlist", newlist);
 		/*for (ProductDTO productDTO : bestlist) {
 			System.out.print(productDTO.getP_code() + "\t");
 			System.out.print(productDTO.getP_name() + "\t");

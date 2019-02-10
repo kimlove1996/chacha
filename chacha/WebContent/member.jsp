@@ -759,7 +759,6 @@ $(document).on("click","#yes",function(){
 </script>
 </head>
 <body id="indexbody">
-         
      <div id="line">
           <header>
               <div id="header" class="divsize">
@@ -849,7 +848,7 @@ $(document).on("click","#yes",function(){
                              
                              
                         </div>
-                        <a href="#" id="yes" class="abox">확인</a>
+                        <a href="#" id="yes">확인</a>
                         <a href="index.bizpoll" id="cancle">돌아가기</a>
                    </div>
               </form>

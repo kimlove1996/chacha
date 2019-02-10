@@ -895,7 +895,7 @@ $(document).ready(function(){
                                   <a href="#" type="button" class="border_in_button"> 답변</a>
                                   
                                   <c:if test="${sessionScope.loginUser.id == boardview.writer}">
-	                                  <a href="boardUpdate.bizpoll?bno=${boardview.bno}" type="button" class="border_in_button" id=""> 수정</a>
+	                                  <a <%-- href="boardUpdate.bizpoll?bno=${boardview.bno}" --%> type="button" class="border_in_button" id="boardUpdate"> 수정</a>
 	                                  <a href="#" type="button" class="border_in_button" id="delete_board_button"> 삭제</a>
                              	  </c:if>
                              </div>

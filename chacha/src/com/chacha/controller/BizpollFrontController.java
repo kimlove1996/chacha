@@ -184,7 +184,6 @@ public class BizpollFrontController extends HttpServlet {
 			action = new ReplyInsertPlayAction();//객체 생성		
 			forward = action.excute(request, response); // 객체(인스턴스)사용
 		}else if(command.equals("/tunning.bizpoll")) {
-			System.out.println("댓글 등록하려고 해요!!");
 			action = new TunningAction();//객체 생성		
 			forward = action.excute(request, response); // 객체(인스턴스)사용
 		}

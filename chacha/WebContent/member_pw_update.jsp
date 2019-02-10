@@ -27,6 +27,7 @@ ul {
      margin: 0 auto;
      width: 700px;
      height: 921px;
+     margin-top: 220px;
 }
 .c_logo {
      display: block;
@@ -110,45 +111,32 @@ ul {
      background-color: #fbf3f8;
      z-index: 1;
 } */
-#check {
-	border-radius: 69px;
-    width: 104px;
-    height: 43px;
+#back {
+    font-size: 17px;
+    border-radius: 69px;
+    padding: 15px 42px;
+    background-color: #cbcbcb;
+    text-align: center;
+    line-height: 43px;
+    color: white;
+    left: 90%;
+    bottom: 75px;
+    position: relative;
+
+}
+#update {
+    border-radius: 69px;
+    padding: 15px 42px;
+    color: white;
     background-color: #cfcaff;
     text-align: center;
     line-height: 43px;
     margin: -126px auto;
-    margin-right: 352px;
+    box-sizing: border-box;
+    position: relative;
+    left: 300px;
+    bottom: 215px;
 
-}
-#check2 {
-	border-radius: 69px;
-    width: 104px;
-    height: 43px;
-    background-color: #cfcaff;
-    text-align: center;
-    line-height: 43px;
-    margin-top: 82px;
-    margin-left: 369px;
-    color: white;
-
-}
-#cancle {
-     float: left;
-     font-size: 17px;
-     margin: 17px 45px;
-     border-radius: 69px;
-     width: 104px;
-     height: 43px;
-     background-color: #d4caef;
-     text-align: center;
-     line-height: 43px;
-}
-#back {
-     color: whitesmoke;
-}
-#back {
-     color: white;
 }
 #insert_box {
      margin: 0;
@@ -235,38 +223,110 @@ ul {
                           $("#input_pw_now").css("background-color", "#fbf3f8");
                           $("#back_id").css("display", "block");
                      });
-           $("#input_pw").focus(function() {
+        
+        //Ajax 비밀번호 
+        $(document).on("blur","#input_pw_now",function(){
+       	 var nowPw=$("#input_pw_now").val();
+       	 
+       	if(nowPw ==""){
+       		$("#input_pw_now").next().text("필수정보입니다.").css("display","block");
+       	};
+       	 if(nowPw !=""){
+       		 $.ajax({
+       			 url : "pwCheck.bizpoll",
+       			 type : "POST",
+       			 dataType : "json",
+       			 data:"id=${sessionScope.loginUser.id}&pw="+nowPw,
+       			 success:function(data){
+       				 if(data.message == "-1"){
+       					 $("#input_pw_now").next().text("기존 비밀번호와 일치합니다").css("display","block").css("color","#0000FF");
+       					/*  $("#input_pw").select(); */
+       				 }else{
+       					 $("#input_pw_now").next().text("기존 비밀번호와 일치하지 않습니다.").css("display","block").css("color","#F46665");
+       					 /* $("#input_pw_now").select(); */
+       				 }
+       			 },
+       			 error:function(){
+       				 alert("System Error!!")
+       			 }
+       		 });
+       	 }
+       	 
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         $("#input_pw").focus(function() {
                           $(this).css("font-size", "15px");
                           $("article #pw").css("top", "20px").css("font-size", "10px").css("font-weight","bold").css("color", "black");
                           $("#input_pw").css("background-color", "#fbf3f8");
                           $("#back_pw").css("display", "block");
                      });
-           $("#input_pw_c").focus(function() {
+           
+      	 $("#input_pw").blur(function(){
+    		 var mpw = $("#input_pw"),
+    		 pw = $.trim(mpw.val()),
+    		 regPass = /^.*(?=.{8,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+    	 
+    		 if(pw == ""){
+    		 	 /* mpw.focus(); */
+    		 	 mpw.next().text("필수정보입니다.").css("display","block").css("color","red");
+    		 	 mpw.parent().css("margin-bottom","12px");
+    			 return false;
+    		 }else if(!regPass.test(pw)){
+    		 	 /* mpw.select(); */
+    		 	 mpw.next().text("9~20자 이내 영문자, 숫자, 특수문자를 혼합하여 이용하세요.").css("display","block");
+    		 	 mpw.parent().css("margin-bottom","12px");
+    		 	 return false;
+    		 }else{
+    		 	 $("#input_pw").next().css("display","none");
+    		 }
+    	});
+      	 
+      	 
+      	 
+      	 
+      	 
+      	 
+       $("#input_pw_c").focus(function() {
                           $(this).css("font-size", "15px");
                           $("article #pw_c").css("top", "20px").css("font-size", "10px").css("font-weight", "bold").css("color","black");
                           $("#input_pw_c").css("background-color","#fbf3f8");
                           $("#back_pw_c").css("display", "block");
                      });
-         
-           
-           
-           
-           $(".pop").blur(function(){
-        	   var inputval = $(this).val();
-        	   
-        	  if(inputval == ""){
-        		  $(this).next().css("display","block");
-          	  	  $(this).parent().css("margin-bottom","12px");
-           }else{
-        		  $(this).next().css("display","none");
-        		  $(this).parent().css("margin-bottom","5px");
-        	  }
-        	  
-        	  /* 비밀번호와 비밀번호 확인값이 다르면 경고메세지 출력 */
-        	  
-        	  
-        	  
-           });  
+       	$("#input_pw_c").blur(function(){
+    		var mpw = $("#input_pw"),
+    			mpw2 = $("#input_pw_c"),
+    			pw = $.trim(mpw.val()),
+    			pw2 = $.trim(mpw2.val());
+    		   	  
+    		if(pw2 == ""){
+    			/*  mpw.focus(); */
+    			mpw2.next().text("필수정보입니다.").css("display","block");
+    			mpw2.parent().css("margin-bottom","12px");
+    			return false;
+    		  	}else if(pw != pw2){
+    			/* mpw2.select();
+    			mpw2.focus(); */
+    			mpw2.next().text("비밀번호가 일치하지 않습니다.").css("display","block");
+    			mpw2.parent().css("margin-bottom","12px");
+    			return false;
+    		 }else{
+     		 	$("#input_pw_c").next().css("display","none");
+    		 }
+    	 });
+             
            
            
            /* 비밀번호 재확인 input태그를 blur했을 때????????????????
@@ -283,8 +343,8 @@ ul {
          	   	 /*  1 . 비밀번호 확인 메시지에 "비밀번호가 일치하지 않습니다."출력
                 2 . 비밀번호확인(input) -> focus가가고
                 3 . 값을 초기화. */
-                $(this).next().text("비밀번호가 일치하지 않습니다.").css("display","block");
-                $(this).select;
+                $(this).next().text("설정하신 비밀번호와 일치하지 않습니다.").css("display","block");
+                /* $(this).select; */
                 
          	   	}
            	  }
@@ -296,33 +356,7 @@ ul {
      
      
      
-     //Ajax 비밀번호 
-     $(document).on("blur","#input_pw_now",function(){
-    	 var nowPw=$("#input_pw_now").val();
-    	 if(nowPw !=""){
-    		 $.ajax({
-    			 url : "pwCheck.bizpoll",
-    			 type : "POST",
-    			 dataType : "json",
-    			 data:"id=${sessionScope.loginUser.id}&pw="+nowPw,
-    			 success:function(data){
-    				 if(data.message == "-1"){
-    					 alert("testㅎ ㅜ후....")
-    					 $("#input_pw_now").next().text("비밀번호가 일치합니다").css("display","block").css("color","#0000FF");
-    					 $("#input_pw").select();
-    				 }else{
-    					 $("#input_pw_now").next().text("비밀번호가 일치하지 않습니다.").css("display","block").css("color","#F46665");
-    					 $("#input_pw_now").select();
-    				 }
-    			 },
-    			 error:function(){
-    				 alert("System Error!!")
-    			 }
-    		 });
-    	 }
-    	 
-     });
-     
+
      
      
      
@@ -339,16 +373,17 @@ ul {
     	  $("#input_pw_now").focus();
   		  $("#input_pw_now").next().css("display","block");
   	  	  $("#input_pw_now").parent().css("margin-bottom","12px");
-  	  	  
+  	  	return false;
     	}else if(pw_new == ""){
+    	  $("#input_pw").focus();
   		  $("#input_pw").next().css("display","block");
   	  	  $("#input_pw").parent().css("margin-bottom","12px");
+  	  	return false;
     	}else if(pw_renew == ""){
+    	  $("#input_pw_c").focus();
   		  $("#input_pw_c").next().css("display","block");
   	  	  $("#input_pw_c").parent().css("margin-bottom","12px");
-    	}else{
-  		  $(".pop").next().css("display","none");
-		  $(".pop").parent().css("margin-bottom","5px");
+  	  	return false;
     	}
     	 
     	 
@@ -377,16 +412,12 @@ ul {
 </script>
 </head>
 <body id="indexbody">
-     <div id="cancle">
-          <a href="http://localhost:8081/chacha/include/header.html" id="back">취소</a>
-     </div>
      <div id="line">
           <header>
               <div id="header" class="divsize">
                    <h1 id="chacha_logo">
                         <a href="http://localhost:8081/chacha/include/header.html"
-                             class="u_logo"> <img class="c_logo" alt="차차로고"
-                             src="img/chacha4.png">
+                             class="u_logo"> <img class="c_logo" alt="차차로고" src="img/chacha4.png">
                         </a>
                    </h1>
                    <div class="lang">
@@ -395,10 +426,6 @@ ul {
                              <option>English</option>
                              <option>中國語</option>
                         </select>
-                   </div>
-                   <div id="welcome">
-                        <p id="welcome_in">
-                             join with chacha<span id="heart">♥</span><img>
                    </div>
               </div>
           </header>
@@ -429,8 +456,8 @@ ul {
                    <input type="hidden" name="updateId" value="${sessionScope.loginUser.id}">
                    
                    
-                             <a href="index.bizpoll" id="back"><div id="check" class="abox">취소하기</div></a>
-                             <a id="update"><div id="check2" class="abox">저장하기</div></a>
+                             <a href="#" id="update">저장하기</a>
+                             <a href="index.bizpoll" id="back">취소하기</a>              
               </form>
               
               

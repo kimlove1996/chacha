@@ -14,7 +14,6 @@ public class MemberUpdatepwPlayAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("안뇨옹?");
 		String url = "member_pw_update.jsp";
 		
 		String id = request.getParameter("updateId");

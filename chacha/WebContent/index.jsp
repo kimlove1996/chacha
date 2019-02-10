@@ -123,10 +123,10 @@
 #e-banner_dot{
 	text-align: center;
 }
-#best_tab{
+.display_tab{
 	margin: 0 65px;
 }
-#best_tab li{
+.display_tab li{
 	float: left;
     border-bottom: 6px double;
     margin: 2px;
@@ -135,6 +135,7 @@
     width: 149px;
     height: 35px;
     line-height: 36px;
+    cursor: pointer;
     
 }
 #best{
@@ -144,7 +145,14 @@
 	width: 1600px;
 	height: 1600px;
 }
-#best_img_line{
+#new{
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+	width: 1600px;
+	height: 1600px;
+}
+.display_img_line{
 	margin: 0 auto;
 	padding:0;
 	border: 1px solid #6d4e8a6b;
@@ -153,17 +161,15 @@
     margin-top: 67px;
 
 }
-#best_img img{
+.display_img img{
 	
 }
-#best_img div {
+.display_img div {
 	text-align: center;
 	display: inline-block;
 	padding: 40px 31px;
 	padding-bottom: 47px;
 	font-size: 12px;
-}
-#display p{
 }
 this.fade{
     -webkit-animation-name: fade;
@@ -171,7 +177,7 @@ this.fade{
     animation-name: fade;
     animation-duration: 1.5s;
 }
-#best_img p{
+#new p,#best p{
 	float: right;
     border: 1px solid #ff8888;
     border-radius: 30px;
@@ -183,12 +189,24 @@ this.fade{
     line-height: 22px;
 }
 
-#best_img a{
+.display_img a{
 	color: black;
 }
 
-</style>
+.displ_img , .displ_name{
+	cursor: pointer;
+}
 
+</style>
+<script type="text/javascript">
+/*  $(document).ready(function(){
+	$(document).on("click",".displ_img",function(){
+		alert("detailProduct.bizpoll?pno=${bestDto.p_code}");
+		location.href="detailProduct.bizpoll?pno=${bestDto.p_code}";
+	});
+}); */
+
+</script>
 </head>
 
 <body id=index_body>
@@ -226,8 +244,8 @@ this.fade{
 
 <div id="display">
 <div id="best">
-	<h1> 한주간 가장 많이 팔린 <b>BEST</b></h1>
-		<div id="best_tab">
+	<h1> 한주간 가장 많이 팔린<b>BEST</b></h1>
+		<div class="display_tab">
 			<ul>
 				<li>오늘!단하루 할인</li>
 				<li>원피스</li>
@@ -237,23 +255,24 @@ this.fade{
 				<li>아우터</li>
 			</ul>
 		</div>
-		<div id="best_img_line">
-			<div id="best_img">
+		<div class="display_img_line">
+			<div class="display_img">
 			
 				<c:forEach items="${bestlist}" var="bestDto"> <!-- bestDto에서 한줄 씩 빼내옴. -->
-					<a><div>
-						<a href="detailProduct.bizpoll">
-							<img src="img/${bestDto.p_img}">
+					<div>
+						<a href="detailProduct.bizpoll?pno=${bestDto.p_code}">
+							<img class="displ_img" src="img/${bestDto.p_img}">
 						</a>
 							<br>
 							<br>
-						<a href="detailProduct.bizpoll">
-							<Strong>${bestDto.p_name}</Strong>
+						<a href="detailProduct.bizpoll?pno=${bestDto.p_code}">
+							<Strong class="displ_name">${bestDto.p_name}</Strong>
 						</a>
 						
 						
 								<hr>
 								${bestDto.p_ex}
+								 <%-- <a href="detailProduct.bizpoll?pno=${bestDto.p_code}"> --%> --%>그리고${bestDto.p_code} <!-- </a> -->
 								<br>
 								<br>
 								<%-- ${bestDto.p_price}<br> --%>
@@ -263,7 +282,69 @@ this.fade{
 								<%-- <span><fmt:formatNumber value="3.141589" pattern="#.##"/> </span> --%> <!-- 소숫점 절삭 -->
 								<br>
 								<p>♥ ${bestDto.p_review}</p>
-					</div></a>
+					</div>
+				</c:forEach>
+					
+					
+					
+					
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div id="new">
+	<h1> 이번달 신상 <b>NEW</b></h1>
+		<div class="display_tab">
+			<ul>
+				<li>오늘!단하루 할인</li>
+				<li>원피스</li>
+				<li>블라우스</li>
+				<li>티셔츠/니트</li>
+				<li>스커트/슬랙스</li>
+				<li>아우터</li>
+			</ul>
+		</div>
+		<div class="display_img_line">
+			<div class="display_img">
+			
+				<c:forEach items="${newlist}" var="newDto"> <!-- bestDto에서 한줄 씩 빼내옴. -->
+					<div>
+						<a href="detailProduct.bizpoll?pno=${bestDto.p_code}">
+							<img class="displ_img" src="img/${newDto.p_img}">
+						</a>
+							<br>
+							<br>
+						<a href="detailProduct.bizpoll?pno=${bestDto.p_code}">
+							<Strong class="displ_name">${newDto.p_name}</Strong>
+						</a>
+						
+						
+								<hr>
+								${newDto.p_ex}
+								<br>
+								<br>
+								<%-- ${bestDto.p_price}<br> --%>
+								<fmt:setLocale value="ko_kr"/> <!-- ja_jp : 엔화 / en_us : 달러 / ko_kr : 원 -->
+								<span><fmt:formatNumber value="${newDto.p_price}" type="currency"/></span><!-- currency : 원단위 붙여주기. -->
+								<%-- <span><fmt:formatNumber value="0.25" type="percent"/> </span> --%> <!-- 25 퍼센트 나타내기 -->
+								<%-- <span><fmt:formatNumber value="3.141589" pattern="#.##"/> </span> --%> <!-- 소숫점 절삭 -->
+								<br>
+								<p>♥ ${newDto.p_review}</p>
+					</div>
 				</c:forEach>
 					
 					

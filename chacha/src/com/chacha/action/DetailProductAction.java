@@ -13,6 +13,8 @@ public class DetailProductAction implements Action{
 			throws ServletException, IOException {
 		String url = "detail_product.jsp";
 		
+		String pno = request.getParameter("pno");
+		System.out.println("==>pno : " + pno);
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);
 		forward.setRedirect(false);	

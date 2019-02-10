@@ -19,6 +19,13 @@
 
 
 	<!-- 신상품 입력. -->
+	<select id="newView" resultType="com.chacha.dto.ProductDTO">
+	<![CDATA[
+	SELECT * FROM ( SELECT * FROM chachaproduct
+	                ORDER BY p_indate DESC)
+	                WHERE ROWNUM <= 8
+	]]>
+	</select>
 
 
 <!-- ======================================================================== -->

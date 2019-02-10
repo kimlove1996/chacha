@@ -56,6 +56,19 @@ public class ProductDAO {
 		return bestlist;
 	}
 	
+	public List<ProductDTO> newView(){
+		sqlSession = sqlSessionFactory.openSession();
+		List<ProductDTO> newlist = null;
+		try {
+			newlist = sqlSession.selectList("newView");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return newlist;
+	}
+	
 
 //	======================================================================	
 // Mybatise 사용하기 전 DBManaer와 PrepareStatement 방식으로 구현한 SAO 객체	
