@@ -234,7 +234,8 @@ $(document).ready(function(){
 
 					<tr>
 						<th>판매가</th>
-						<td>${productview.p_price}</td>
+						<td><fmt:formatNumber value="${productview.p_price}"/> 원</td>
+						
 					</tr>
 
 					<tr>
