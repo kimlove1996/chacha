@@ -164,7 +164,7 @@
 .display_img img{
 	
 }
-.display_img div {
+.display_img > div {
 	text-align: center;
 	display: inline-block;
 	padding: 40px 31px;
@@ -181,7 +181,7 @@ this.fade{
 	float: right;
     border: 1px solid #ff8888;
     border-radius: 30px;
-    width: 59px;
+    padding : 0 12px;
     height: 22px;
     background-color: #ff8888;
     color: white;
@@ -196,6 +196,16 @@ this.fade{
 .displ_img , .displ_name{
 	cursor: pointer;
 }
+
+div#item_color>div{
+	display: inline-block;
+    padding: 4px 4px;
+    margin: 3px;
+    margin-top: 9px;
+    border: 1px solid #d4d4d4;
+}
+
+
 
 </style>
 <script type="text/javascript">
@@ -268,6 +278,18 @@ this.fade{
 						<a href="detailProduct.bizpoll?p_code=${bestDto.p_code}">
 							<Strong class="displ_name">${bestDto.p_name}</Strong>
 						</a>
+						<div id="item_color">
+							<!-- 검정 빨강 주황 노랑 초록 파랑 보라 핑크 회색 민트 베이지 -->
+							<c:if test="${!empty bestDto.p_color1}">
+							<div id="color1" style="background-color:${bestDto.p_color1}"></div>
+							</c:if>
+							<c:if test="${!empty bestDto.p_color2}">
+							<div id="color2" style="background-color:${bestDto.p_color2}"></div>
+							</c:if>
+							<c:if test="${!empty bestDto.p_color3}">
+							<div id="color3" style="background-color:${bestDto.p_color3}"></div>
+							</c:if>
+						</div>
 						
 						
 								<hr>
@@ -280,7 +302,7 @@ this.fade{
 								<%-- <span><fmt:formatNumber value="0.25" type="percent"/> </span> --%> <!-- 25 퍼센트 나타내기 -->
 								<%-- <span><fmt:formatNumber value="3.141589" pattern="#.##"/> </span> --%> <!-- 소숫점 절삭 -->
 								<br>
-								<p>♥ ${bestDto.p_review}</p>
+								<p>♥ ${bestDto.p_likecnt}</p>
 					</div>
 				</c:forEach>
 					
@@ -330,7 +352,18 @@ this.fade{
 						<a href="detailProduct.bizpoll?p_code=${newDto.p_code}">
 							<Strong class="displ_name">${newDto.p_name}</Strong>
 						</a>
-						
+						<div id="item_color">
+							<!-- 검정 빨강 주황 노랑 초록 파랑 보라 핑크 회색 민트 베이지 -->
+							<c:if test="${!empty newDto.p_color1}">
+							<div id="color1" style="background-color:${newDto.p_color1}"></div>
+							</c:if>
+							<c:if test="${!empty newDto.p_color2}">
+							<div id="color2" style="background-color:${newDto.p_color2}"></div>
+							</c:if>
+							<c:if test="${!empty newDto.p_color3}">
+							<div id="color3" style="background-color:${newDto.p_color3}"></div>
+							</c:if>
+						</div>
 						
 								<hr>
 								${newDto.p_ex}
@@ -342,7 +375,7 @@ this.fade{
 								<%-- <span><fmt:formatNumber value="0.25" type="percent"/> </span> --%> <!-- 25 퍼센트 나타내기 -->
 								<%-- <span><fmt:formatNumber value="3.141589" pattern="#.##"/> </span> --%> <!-- 소숫점 절삭 -->
 								<br>
-								<p>♥ ${newDto.p_review}</p>
+								<p>♥ ${newDto.p_likecnt}</p>
 					</div>
 				</c:forEach>
 					

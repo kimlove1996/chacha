@@ -7,23 +7,42 @@ public class ProductDTO {
 	private String p_name;
 	private String p_ex;
 	private int p_price;
-	private String p_img;
+	private int p_likecnt;
 	private String p_review;
+	private String p_img;
+	private String p_size1;
+	private String p_size2;
+	private String p_size3;
+	private String p_size4;
+	private String p_color1;
+	private String p_color2;
+	private String p_color3;
+	private int p_amount;
 	private Date p_indate;
 	
 	public ProductDTO() {
 		super();
 	}
 
-	public ProductDTO(String p_code, String p_name, String p_ex, int p_price, String p_img, String p_review,
-			Date p_indate) {
+	public ProductDTO(String p_code, String p_name, String p_ex, int p_price, int p_likecnt, String p_review,
+			String p_img, String p_size1, String p_size2, String p_size3, String p_size4, String p_color1,
+			String p_color2, String p_color3, int p_amount, Date p_indate) {
 		super();
 		this.p_code = p_code;
 		this.p_name = p_name;
 		this.p_ex = p_ex;
 		this.p_price = p_price;
-		this.p_img = p_img;
+		this.p_likecnt = p_likecnt;
 		this.p_review = p_review;
+		this.p_img = p_img;
+		this.p_size1 = p_size1;
+		this.p_size2 = p_size2;
+		this.p_size3 = p_size3;
+		this.p_size4 = p_size4;
+		this.p_color1 = p_color1;
+		this.p_color2 = p_color2;
+		this.p_color3 = p_color3;
+		this.p_amount = p_amount;
 		this.p_indate = p_indate;
 	}
 
@@ -59,12 +78,12 @@ public class ProductDTO {
 		this.p_price = p_price;
 	}
 
-	public String getP_img() {
-		return p_img;
+	public int getP_likecnt() {
+		return p_likecnt;
 	}
 
-	public void setP_img(String p_img) {
-		this.p_img = p_img;
+	public void setP_likecnt(int p_likecnt) {
+		this.p_likecnt = p_likecnt;
 	}
 
 	public String getP_review() {
@@ -73,6 +92,78 @@ public class ProductDTO {
 
 	public void setP_review(String p_review) {
 		this.p_review = p_review;
+	}
+
+	public String getP_img() {
+		return p_img;
+	}
+
+	public void setP_img(String p_img) {
+		this.p_img = p_img;
+	}
+
+	public String getP_size1() {
+		return p_size1;
+	}
+
+	public void setP_size1(String p_size1) {
+		this.p_size1 = p_size1;
+	}
+
+	public String getP_size2() {
+		return p_size2;
+	}
+
+	public void setP_size2(String p_size2) {
+		this.p_size2 = p_size2;
+	}
+
+	public String getP_size3() {
+		return p_size3;
+	}
+
+	public void setP_size3(String p_size3) {
+		this.p_size3 = p_size3;
+	}
+
+	public String getP_size4() {
+		return p_size4;
+	}
+
+	public void setP_size4(String p_size4) {
+		this.p_size4 = p_size4;
+	}
+
+	public String getP_color1() {
+		return p_color1;
+	}
+
+	public void setP_color1(String p_color1) {
+		this.p_color1 = p_color1;
+	}
+
+	public String getP_color2() {
+		return p_color2;
+	}
+
+	public void setP_color2(String p_color2) {
+		this.p_color2 = p_color2;
+	}
+
+	public String getP_color3() {
+		return p_color3;
+	}
+
+	public void setP_color3(String p_color3) {
+		this.p_color3 = p_color3;
+	}
+
+	public int getP_amount() {
+		return p_amount;
+	}
+
+	public void setP_amount(int p_amount) {
+		this.p_amount = p_amount;
 	}
 
 	public Date getP_indate() {
@@ -86,13 +177,14 @@ public class ProductDTO {
 	@Override
 	public String toString() {
 		return "ProductDTO [p_code=" + p_code + ", p_name=" + p_name + ", p_ex=" + p_ex + ", p_price=" + p_price
-				+ ", p_img=" + p_img + ", p_review=" + p_review + ", p_indate=" + p_indate + "]";
+				+ ", p_likecnt=" + p_likecnt + ", p_review=" + p_review + ", p_img=" + p_img + ", p_size1=" + p_size1
+				+ ", p_size2=" + p_size2 + ", p_size3=" + p_size3 + ", p_size4=" + p_size4 + ", p_color1=" + p_color1
+				+ ", p_color2=" + p_color2 + ", p_color3=" + p_color3 + ", p_amount=" + p_amount + ", p_indate="
+				+ p_indate + "]";
 	}
 
 	
 	
-	
-
 	
 	
 }

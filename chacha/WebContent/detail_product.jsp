@@ -87,19 +87,14 @@
 #guideArea {
 	border-top: 1px solid #e4e4e4;
 	border-bottom: 1px solid #e4e4e4;
-	height: 70px;
 }
 
 #guideArea>span {
-	color: gray;
-	font-size: 12px;
-	line-height: 33px;
-}
-
-#guideArea>span+span {
 	color: red;
+	font-size: 12px;
 	line-height: 45px;
 }
+
 
 #price_count {
 	margin-top: 20px;
@@ -177,6 +172,22 @@
 .active2{background-image: url(img/ex2.jpg);}
 .active3{background-image: url(img/ex3.jpg);}
 .active4{background-image: url(img/ex4.jpg);}
+
+#select_amount{
+    width: 35px;
+    text-align: center;
+    position: relative;
+    left: 5px;
+    height: 17px;
+    border: 1px solid #d7d7d7;
+    vertical-align: sub;
+}
+
+#delete_botton{
+	position: relative;
+    left: -1px;
+    bottom: -1px;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -199,6 +210,7 @@ $(document).ready(function(){
 	}); 
 	
 });
+
 </script>
 </head>
 <body>
@@ -242,25 +254,84 @@ $(document).ready(function(){
 						<th>적립금</th>
 						<td>200point</td>
 					</tr>
+					<tr>
+						<th></th>
+						<td style="text-align:right;">남은 상품수 : ${productview.p_amount} 개</td>
+					</tr>
 				</table>
 				<table id="table02">
 					<tr>
 						<th>색상</th>
 						<td><select>
 								<option>- [필수] 옵션을 선택해 주세요^^ -</option>
+								<option> ${productview.p_color1} </option>
+								<c:if test="${!empty productview.p_color2}">
+								<option> ${productview.p_color2} </option>
+								</c:if>
+								<c:if test="${!empty productview.p_color3}">
+								<option> ${productview.p_color3} </option>
+								</c:if>
 						</select></td>
 					</tr>
 					<tr>
 						<th>사이즈</th>
 						<td><select>
 								<option>- [필수] 옵션을 선택해 주세요^^ -</option>
+								<option> ${productview.p_size1} </option>
+								<c:if test="${!empty productview.p_size2}">
+								<option> ${productview.p_size2} </option>
+								</c:if>
+								<c:if test="${!empty productview.p_size3}">
+								<option> ${productview.p_size3} </option>
+								</c:if>
+								<c:if test="${!empty productview.p_size4}">
+								<option> ${productview.p_size4} </option>
+								</c:if>
+								
 						</select></td>
 					</tr>
 				</table>
 
 				<div id="guideArea">
-					<span> (최소주문수량 1개 이상)<br></span> <span> 위 옵션선택 박스를
-						선택하시면 아래에 상품이 추가됩니다.</span>
+					<span> 위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</span>
+						
+					<table style="border-top: none;padding: 4px;">	
+						<tr id="selected_item">
+							<td style="width: 173px;">
+								<p style="color:gray;margin:0 0 4px 0;font-size:13px;">${productview.p_name}</p>
+								<strong><!-- 선택한 것 -->- white / free</strong>
+							</td>
+							<td style="padding-left: 12px;">
+								<div>
+									<input id="select_amount" value="1">
+									<a style="position: absolute;">
+										<img alt="" src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif">
+									</a>
+									<a style="position: relative;top:10px;">
+										<img alt="" src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif">
+									</a>
+									
+									<a id="delete_botton">
+										<img alt="" src="//img.echosting.cafe24.com/design/skin/default/product/btn_price_delete.gif">
+									</a>
+									
+								</div>
+								
+							</td>
+							<td>
+								<span>
+									<input type="hidden">
+									<span  style="display: block;text-align: right;">39,800원</span>
+								</span>
+								<span style="display: block;text-align: right;">
+								(
+								<img alt="" src="//img.echosting.cafe24.com/design/skin/admin/ko_KR/ico_product_point.gif">
+								3,900Point)
+								
+								</span>
+							</td>
+						</tr>	
+					</table>
 				</div>
 
 				<div id="price_count">
